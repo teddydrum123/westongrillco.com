@@ -428,7 +428,7 @@
         <div>
           <div class="form-group"><label>Your name</label><input type="text" id="f-name" placeholder="Jane Smith" /></div>
           <div class="form-group"><label>Phone number</label><input type="tel" id="f-phone" placeholder="(203) 555-0123" /></div>
-          <div class="form-group"><label>Email</label><input type="email" id="f-email" placeholder="jane@email.com" /></div>
+          <div class="form-group"><label>Grill type</label><input type="text" id="f-email" placeholder="e.g. Weber 4-burner gas grill" /></div>
           <div class="form-group"><label>Address</label><input type="text" id="f-addr" placeholder="123 Main St, Weston, CT" /></div>
           <div class="form-group"><label>Preferred date</label><input type="date" id="f-date" /></div>
           <button class="btn-primary" onclick="submitBooking()" style="width: 100%;">Request appointment</button>
@@ -465,7 +465,7 @@
           </div>
           <div class="contact-item">
             <h4>Email</h4>
-            <a href="mailto:westongrillcompany@gmail.com">westongrillcompany@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#1c6b796f6873727b6e7570707f73716c7d72655c7b717d7570327f7371"><span class="__cf_email__" data-cfemail="f2859781869d9c95809b9e9e919d9f82939c8bb2959f939b9edc919d9f">[email&#160;protected]</span></a>
           </div>
           <div class="contact-item">
             <h4>Venmo</h4>
@@ -525,6 +525,7 @@
       <div class="t-add">
         <input type="text" id="t-name" placeholder="Customer name" />
         <input type="text" id="t-addr" placeholder="Address" />
+        <input type="text" id="t-grill" placeholder="Grill type" />
         <input type="date" id="t-date" />
         <button class="btn-primary" onclick="addBooking()" style="white-space:nowrap;padding:10px 20px;font-size:12px;">+ Add</button>
       </div>
@@ -536,7 +537,7 @@
       </div>
       <div class="t-table-wrap">
         <table>
-          <thead><tr><th>Customer</th><th>Address</th><th>Date</th><th>Status</th><th></th></tr></thead>
+          <thead><tr><th>Customer</th><th>Address</th><th>Grill type</th><th>Date</th><th>Status</th><th></th></tr></thead>
           <tbody id="tbody"></tbody>
         </table>
         <div class="t-empty" id="empty-state" style="display:none">No bookings yet — add one above.</div>
@@ -550,7 +551,7 @@
   </footer>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var bookings = JSON.parse(localStorage.getItem('wgc-v2') || '[]');
 var currentFilter = 'all';
 var trackerUnlocked = false;
@@ -585,17 +586,17 @@ function toggleMenu() {
 function submitBooking() {
   var name = document.getElementById('f-name').value.trim();
   var phone = document.getElementById('f-phone').value.trim();
-  var email = document.getElementById('f-email').value.trim();
+  var grill = document.getElementById('f-email').value.trim();
   var addr = document.getElementById('f-addr').value.trim();
   var date = document.getElementById('f-date').value;
-  if (!name || !phone || !email || !addr || !date) { alert('Please fill in all fields.'); return; }
+  if (!name || !phone || !grill || !addr || !date) { alert('Please fill in all fields.'); return; }
   var today = new Date().toISOString().split('T')[0];
-  bookings.push({ id: Date.now(), name: name, addr: addr, date: date, status: date >= today ? 'upcoming' : 'done' });
+  bookings.push({ id: Date.now(), name: name, addr: addr, grill: grill, date: date, status: date >= today ? 'upcoming' : 'done' });
   save();
   fetch('https://formspree.io/f/xeeprljo', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({ name: name, phone: phone, email: email, address: addr, date: date, _replyto: email })
+    body: JSON.stringify({ name: name, phone: phone, grill_type: grill, address: addr, date: date, _replyto: 'westongrillcompany@gmail.com' })
   });
   document.getElementById('f-name').value = '';
   document.getElementById('f-phone').value = '';
@@ -610,13 +611,15 @@ function submitBooking() {
 function addBooking() {
   var name = document.getElementById('t-name').value.trim();
   var addr = document.getElementById('t-addr').value.trim();
+  var grill = document.getElementById('t-grill').value.trim();
   var date = document.getElementById('t-date').value;
   if (!name || !addr || !date) { alert('Please fill in all fields.'); return; }
   var today = new Date().toISOString().split('T')[0];
-  bookings.push({ id: Date.now(), name: name, addr: addr, date: date, status: date >= today ? 'upcoming' : 'done' });
+  bookings.push({ id: Date.now(), name: name, addr: addr, grill: grill, date: date, status: date >= today ? 'upcoming' : 'done' });
   save(); render();
   document.getElementById('t-name').value = '';
   document.getElementById('t-addr').value = '';
+  document.getElementById('t-grill').value = '';
   document.getElementById('t-date').value = '';
 }
 
@@ -645,8 +648,8 @@ function fmtDate(d) {
 
 function exportCSV() {
   if (!bookings.length) { alert('No bookings to export.'); return; }
-  var rows = [['Name', 'Address', 'Date', 'Status']];
-  bookings.forEach(function(b) { rows.push([b.name, b.addr, b.date, b.status]); });
+  var rows = [['Name', 'Address', 'Grill type', 'Date', 'Status']];
+  bookings.forEach(function(b) { rows.push([b.name, b.addr, b.grill || '', b.date, b.status]); });
   var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n');
   var a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
@@ -665,11 +668,5 @@ function render() {
   if (!filtered.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
   empty.style.display = 'none';
   tbody.innerHTML = filtered.map(function(b) {
-    return '<tr><td style="font-weight:700">' + b.name + '</td><td style="color:var(--text-soft)">' + b.addr + '</td><td>' + fmtDate(b.date) + '</td><td><select class="status-sel" onchange="updateStatus(' + b.id + ',this.value)"><option value="upcoming"' + (b.status === 'upcoming' ? ' selected' : '') + '>Upcoming</option><option value="done"' + (b.status === 'done' ? ' selected' : '') + '>Completed</option><option value="cancelled"' + (b.status === 'cancelled' ? ' selected' : '') + '>Cancelled</option></select></td><td style="text-align:right"><button class="del-btn" onclick="deleteBooking(' + b.id + ')">&#x2715;</button></td></tr>';
+    return '<tr><td style="font-weight:700">' + b.name + '</td><td style="color:var(--text-soft)">' + b.addr + '</td><td style="color:var(--text-soft)">' + (b.grill || '—') + '</td><td>' + fmtDate(b.date) + '</td><td><select class="status-sel" onchange="updateStatus(' + b.id + ',this.value)"><option value="upcoming"' + (b.status === 'upcoming' ? ' selected' : '') + '>Upcoming</option><option value="done"' + (b.status === 'done' ? ' selected' : '') + '>Completed</option><option value="cancelled"' + (b.status === 'cancelled' ? ' selected' : '') + '>Cancelled</option></select></td><td style="text-align:right"><button class="del-btn" onclick="deleteBooking(' + b.id + ')">&#x2715;</button></td></tr>';
   }).join('');
-}
-
-render();
-</script>
-</body>
-</html>
