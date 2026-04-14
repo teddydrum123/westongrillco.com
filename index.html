@@ -8,247 +8,170 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
 <style>
-/* (keeping your styles exactly the same — no changes needed) */
+/* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-/* ... ALL YOUR CSS STAYS THE SAME ... */
+
+:root {
+  --navy:#0f1f3d;
+  --orange:#2d6a4f;
+  --cream:#f5f0e8;
+  --text:#0f1f3d;
+}
+
+body {
+  font-family: Lato, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+}
+
+/* ===== NAV ===== */
+nav {
+  background: var(--navy);
+  color: white;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 20px;
+}
+
+.logo { cursor:pointer; font-weight:700; }
+.nav-links a { color:white; margin:0 10px; cursor:pointer; }
+
+/* ===== PAGES ===== */
+.page { display:none; padding:20px; }
+.page.active { display:block; }
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+  background: var(--orange);
+  color:white;
+  padding:10px 16px;
+  border:none;
+  cursor:pointer;
+}
+
+/* ===== TRACKER ===== */
+table { width:100%; margin-top:20px; border-collapse:collapse; }
+td,th { border:1px solid #ddd; padding:8px; }
 </style>
 </head>
 
 <body>
 
-<!-- (ALL YOUR HTML STAYS EXACTLY THE SAME — no changes needed) -->
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="goPage('home')">Weston Grill Co</div>
+  <div class="nav-links">
+    <a onclick="goPage('home')">Home</a>
+    <a onclick="goPage('book')">Book</a>
+    <a onclick="goPage('contact')">Contact</a>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <h1>Welcome to Weston Grill Co</h1>
+  <button class="btn-primary" onclick="goPage('book')">Book Now</button>
+</div>
+
+<!-- BOOK -->
+<div id="page-book" class="page">
+  <h2>Book Appointment</h2>
+
+  <input id="name" placeholder="Name"><br><br>
+  <input id="phone" placeholder="Phone"><br><br>
+  <input id="addr" placeholder="Address"><br><br>
+  <input id="date" type="date"><br><br>
+
+  <button class="btn-primary" onclick="submitBooking()">Submit</button>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="page">
+  <h2>Contact</h2>
+  <p>Call or text: (203) 313-7538</p>
+</div>
+
+<!-- TRACKER -->
+<div id="page-tracker" class="page">
+  <h2>Tracker</h2>
+  <button onclick="openTracker()">Unlock</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
 
 <script>
-// =========================
-// DATA
-// =========================
-let bookings = JSON.parse(localStorage.getItem('wgc-v2') || '[]');
-let currentFilter = 'all';
-let trackerUnlocked = false;
+let bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
+let unlocked = false;
 
-function save() {
-  localStorage.setItem('wgc-v2', JSON.stringify(bookings));
+/* NAV */
+function goPage(page){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page-"+page).classList.add("active");
 }
 
-// =========================
-// NAVIGATION
-// =========================
-function goPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+/* BOOKING */
+function submitBooking(){
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const addr = document.getElementById("addr").value;
+  const date = document.getElementById("date").value;
 
-  document.getElementById('page-' + id).classList.add('active');
-
-  const nav = document.getElementById('nav-' + id);
-  if (nav) nav.classList.add('active');
-
-  window.scrollTo(0, 0);
-
-  if (id === 'tracker') render();
-}
-
-function toggleMenu() {
-  const m = document.getElementById('mobile-menu');
-  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
-  m.style.flexDirection = 'column';
-}
-
-function openTracker() {
-  if (!trackerUnlocked) {
-    const pw = prompt('Enter password:');
-    if (pw !== 'Teddy0315') {
-      alert('Incorrect password.');
-      return;
-    }
-    trackerUnlocked = true;
-  }
-  goPage('tracker');
-}
-
-// =========================
-// BOOKING FORM
-// =========================
-function submitBooking() {
-  const name = document.getElementById('f-name').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
-  const grill = document.getElementById('f-email').value.trim();
-  const addr = document.getElementById('f-addr').value.trim();
-  const date = document.getElementById('f-date').value;
-
-  if (!name || !phone || !grill || !addr || !date) {
-    alert('Please fill in all fields.');
+  if(!name || !phone || !addr || !date){
+    alert("Fill all fields");
     return;
   }
-
-  const today = new Date().toISOString().split('T')[0];
 
   bookings.push({
-    id: Date.now(),
-    name,
-    addr,
-    grill,
-    date,
-    status: date >= today ? 'upcoming' : 'done'
+    id:Date.now(),
+    name, addr, date,
+    status:"upcoming"
   });
 
-  save();
-
-  // send to Formspree
-  fetch('https://formspree.io/f/xeeprljo', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({
-      name,
-      phone,
-      grill_type: grill,
-      address: addr,
-      date
-    })
-  });
-
-  // clear form
-  ['f-name','f-phone','f-email','f-addr','f-date'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-
-  const banner = document.getElementById('success-banner');
-  banner.style.display = 'block';
-  setTimeout(() => banner.style.display = 'none', 5000);
+  localStorage.setItem("bookings", JSON.stringify(bookings));
+  alert("Booked!");
 }
 
-// =========================
-// TRACKER
-// =========================
-function addBooking() {
-  const name = document.getElementById('t-name').value.trim();
-  const addr = document.getElementById('t-addr').value.trim();
-  const grill = document.getElementById('t-grill').value.trim();
-  const date = document.getElementById('t-date').value;
-
-  if (!name || !addr || !date) {
-    alert('Please fill in all fields.');
-    return;
-  }
-
-  const today = new Date().toISOString().split('T')[0];
-
-  bookings.push({
-    id: Date.now(),
-    name,
-    addr,
-    grill,
-    date,
-    status: date >= today ? 'upcoming' : 'done'
-  });
-
-  save();
-  render();
-
-  ['t-name','t-addr','t-grill','t-date'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-}
-
-function deleteBooking(id) {
-  if (!confirm('Remove this booking?')) return;
-
-  bookings = bookings.filter(b => b.id !== id);
-  save();
+/* TRACKER */
+function openTracker(){
+  const pw = prompt("Password:");
+  if(pw !== "Teddy0315") return alert("Wrong password");
+  unlocked = true;
+  goPage("tracker");
   render();
 }
 
-function updateStatus(id, val) {
-  bookings = bookings.map(b =>
-    b.id === id ? { ...b, status: val } : b
-  );
-  save();
+function deleteBooking(id){
+  bookings = bookings.filter(b=>b.id !== id);
+  localStorage.setItem("bookings", JSON.stringify(bookings));
   render();
 }
 
-function setFilter(f, el) {
-  currentFilter = f;
-  document.querySelectorAll('.t-filter').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  render();
-}
+function render(){
+  if(!unlocked) return;
 
-function fmtDate(d) {
-  return new Date(d + 'T00:00:00').toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  });
-}
-
-function exportCSV() {
-  if (!bookings.length) {
-    alert('No bookings to export.');
-    return;
-  }
-
-  const rows = [['Name','Address','Grill type','Date','Status']];
-  bookings.forEach(b => {
-    rows.push([b.name, b.addr, b.grill || '', b.date, b.status]);
-  });
-
-  const csv = rows.map(r =>
-    r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')
-  ).join('\n');
-
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-  a.download = 'weston-grill-bookings.csv';
-  a.click();
-}
-
-function render() {
-  const filtered = bookings
-    .filter(b => currentFilter === 'all' || b.status === currentFilter)
-    .sort((a,b) => a.date.localeCompare(b.date));
-
-  document.getElementById('s-total').textContent = bookings.length;
-  document.getElementById('s-upcoming').textContent =
-    bookings.filter(b => b.status === 'upcoming').length;
-  document.getElementById('s-done').textContent =
-    bookings.filter(b => b.status === 'done').length;
-
-  const tbody = document.getElementById('tbody');
-  const empty = document.getElementById('empty-state');
-
-  if (!filtered.length) {
-    tbody.innerHTML = '';
-    empty.style.display = 'block';
-    return;
-  }
-
-  empty.style.display = 'none';
-
-  tbody.innerHTML = filtered.map(b => `
+  const tbody = document.getElementById("tbody");
+  tbody.innerHTML = bookings.map(b=>`
     <tr>
-      <td style="font-weight:700">${b.name}</td>
-      <td style="color:var(--text-soft)">${b.addr}</td>
-      <td style="color:var(--text-soft)">${b.grill || '—'}</td>
-      <td>${fmtDate(b.date)}</td>
-      <td>
-        <select class="status-sel" onchange="updateStatus(${b.id},this.value)">
-          <option value="upcoming" ${b.status==='upcoming'?'selected':''}>Upcoming</option>
-          <option value="done" ${b.status==='done'?'selected':''}>Completed</option>
-          <option value="cancelled" ${b.status==='cancelled'?'selected':''}>Cancelled</option>
-        </select>
-      </td>
-      <td style="text-align:right">
-        <button class="del-btn" onclick="deleteBooking(${b.id})">✕</button>
-      </td>
+      <td>${b.name}</td>
+      <td>${b.addr}</td>
+      <td>${b.date}</td>
+      <td>${b.status}</td>
+      <td><button onclick="deleteBooking(${b.id})">X</button></td>
     </tr>
-  `).join('');
+  `).join("");
 }
-
-// INITIAL LOAD
-render();
-
 </script>
 
 </body>
