@@ -3,114 +3,271 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Weston Grill Co</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+<title>Weston Grill Co — Weston, CT</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --coral: #D85A30; --coral-dark: #993C1D; --coral-light: #FAECE7;
-    --text: #1a1a18; --text-mid: #5a5a55; --text-soft: #8a8a84;
-    --border: rgba(0,0,0,0.1); --bg: #fafaf8; --white: #ffffff;
-    --green-bg: #EAF3DE; --green-text: #27500A;
-    --blue-bg: #E6F1FB; --blue-text: #0C447C;
-    --red-bg: #FCEBEB; --red-text: #791F1F;
+    --navy: #0f1f3d;
+    --navy-mid: #1a3260;
+    --navy-light: #243d72;
+    --cream: #f5f0e8;
+    --cream-dark: #ede7d9;
+    --orange: #2d6a4f;
+    --orange-dark: #1b4332;
+    --white: #ffffff;
+    --text: #0f1f3d;
+    --text-mid: #3d5278;
+    --text-soft: #7a8fa8;
+    --border: rgba(15,31,61,0.12);
   }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; }
-  nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 100; }
-  .logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--text); cursor: pointer; }
-  .logo span { color: var(--coral); }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); font-size: 16px; line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    background: var(--navy);
+    padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px; position: sticky; top: 0; z-index: 100;
+    border-bottom: 3px solid var(--orange);
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; letter-spacing: 2px;
+    color: var(--white); cursor: pointer;
+  }
+  .logo em { color: var(--orange); font-style: normal; }
   .nav-links { display: flex; gap: 4px; }
-  .nav-links a { font-size: 14px; color: var(--text-mid); text-decoration: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
-  .nav-links a:hover, .nav-links a.active { background: var(--coral-light); color: var(--coral); }
+  .nav-links a {
+    font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    padding: 6px 14px; border-radius: 4px; cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.1); }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
-  .mobile-menu { display: none; flex-direction: column; background: var(--white); border-bottom: 1px solid var(--border); padding: 8px 16px 16px; }
-  .mobile-menu a { font-size: 15px; color: var(--text-mid); padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; text-decoration: none; display: block; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+  .mobile-menu { display: none; flex-direction: column; background: var(--navy-mid); border-bottom: 2px solid var(--orange); }
+  .mobile-menu a { font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.85); padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); cursor: pointer; text-decoration: none; display: block; }
   .mobile-menu a:last-child { border-bottom: none; }
+
   .page { display: none; }
   .page.active { display: block; }
-  .hero { background: var(--white); padding: 72px 24px 64px; text-align: center; border-bottom: 1px solid var(--border); }
-  .hero-badge { display: inline-block; background: var(--coral-light); color: var(--coral); font-size: 12px; font-weight: 500; padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; }
-  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 6vw, 52px); font-weight: 600; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 18px; }
-  .hero p { font-size: 17px; color: var(--text-mid); max-width: 420px; margin: 0 auto 32px; }
-  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .btn { display: inline-block; background: var(--coral); color: white; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; padding: 13px 30px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; }
-  .btn:hover { background: var(--coral-dark); }
-  .btn-outline { background: transparent; color: var(--coral); border: 1.5px solid var(--coral); }
-  .btn-outline:hover { background: var(--coral-light); }
-  .btn-sm { padding: 9px 20px; font-size: 13px; }
-  .divider { border-bottom: 1px solid var(--border); }
-  .bg-white { background: var(--white); }
-  .section { padding: 56px 24px; max-width: 900px; margin: 0 auto; }
-  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--coral); font-weight: 500; margin-bottom: 8px; }
-  .section h2 { font-family: 'Playfair Display', serif; font-size: clamp(22px, 4vw, 32px); font-weight: 500; margin-bottom: 32px; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-  .card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px; }
-  .card-icon { font-size: 24px; margin-bottom: 14px; }
-  .card h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-  .card p { font-size: 14px; color: var(--text-mid); line-height: 1.55; }
-  .pricing-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; max-width: 380px; margin: 0 auto; padding: 36px 32px; text-align: center; }
-  .price { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 600; color: var(--coral); line-height: 1; margin: 16px 0 8px; }
-  .price-label { font-size: 14px; color: var(--text-soft); margin-bottom: 24px; }
-  .pricing-features { list-style: none; margin: 20px 0 28px; text-align: left; display: flex; flex-direction: column; gap: 10px; }
-  .pricing-features li { font-size: 14px; color: var(--text-mid); display: flex; align-items: center; gap: 10px; }
-  .check { display: inline-flex; width: 18px; height: 18px; min-width: 18px; border-radius: 50%; background: var(--green-bg); align-items: center; justify-content: center; }
-  .check svg { width: 10px; height: 10px; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-  .contact-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px; display: flex; align-items: flex-start; gap: 16px; }
-  .contact-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--coral-light); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .contact-card h4 { font-size: 12px; font-weight: 500; color: var(--text-soft); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .contact-card a, .contact-card p { font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; }
-  .contact-card a:hover { color: var(--coral); }
-  .form-wrap { max-width: 500px; }
-  .form-row { margin-bottom: 16px; }
-  .form-row label { display: block; font-size: 13px; font-weight: 500; color: var(--text-mid); margin-bottom: 6px; }
-  .form-row input { width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--white); outline: none; }
-  .form-row input:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(216,90,48,0.1); }
-  .price-note { background: var(--coral-light); color: var(--coral-dark); border-radius: 8px; padding: 12px 16px; font-size: 14px; margin-bottom: 24px; font-weight: 500; }
-  .success-banner { display: none; background: var(--green-bg); color: var(--green-text); border-radius: 8px; padding: 14px 18px; font-size: 14px; margin-top: 16px; font-weight: 500; }
-  .tracker-wrap { padding: 40px 24px; max-width: 960px; margin: 0 auto; }
-  .tracker-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-  .tracker-top h2 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; }
-  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
-  .stat { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-  .stat-label { font-size: 12px; color: var(--text-soft); margin-bottom: 4px; }
-  .stat-val { font-size: 26px; font-weight: 500; }
-  .add-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-  .add-row input { flex: 1; min-width: 130px; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); background: var(--white); outline: none; }
-  .add-row input:focus { border-color: var(--coral); }
-  .filter-row { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
-  .filter-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; font-size: 12px; cursor: pointer; color: var(--text-mid); font-family: 'DM Sans', sans-serif; }
-  .filter-btn.active { background: var(--coral); color: white; border-color: var(--coral); }
-  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--white); }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 80px 32px 72px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: 'GRILL';
+    position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 220px; color: rgba(255,255,255,0.03);
+    line-height: 1; pointer-events: none; user-select: none;
+  }
+  .hero-inner { max-width: 680px; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 20px;
+    border-left: 3px solid var(--orange); padding-left: 10px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 88px);
+    color: var(--white); line-height: 0.95;
+    letter-spacing: 2px; margin-bottom: 24px;
+  }
+  .hero h1 span { color: var(--orange); }
+  .hero p { font-size: 17px; color: rgba(255,255,255,0.65); max-width: 440px; margin-bottom: 36px; font-weight: 300; line-height: 1.7; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--orange); color: var(--white);
+    font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 14px 32px; border: none; border-radius: 2px; cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 14px 32px; border: 2px solid rgba(255,255,255,0.3); border-radius: 2px; cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    gap: 48px; padding: 18px 32px; flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--white); letter-spacing: 1px; line-height: 1; }
+  .stat-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-top: 2px; }
+
+  /* SECTIONS */
+  .section { padding: 72px 32px; max-width: 1000px; margin: 0 auto; }
+  .section-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-tag::after { content: ''; display: block; height: 2px; width: 32px; background: var(--orange); }
+  .section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 52px); letter-spacing: 1px;
+    color: var(--navy); margin-bottom: 40px; line-height: 1;
+  }
+
+  /* SERVICE CARDS */
+  .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; }
+  .service-card {
+    background: var(--navy); padding: 36px 28px;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 3px; background: var(--orange);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(255,255,255,0.07); line-height: 1; margin-bottom: -12px; }
+  .service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: var(--white); margin-bottom: 10px; }
+  .service-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; font-weight: 300; }
+
+  /* PHOTO GRID */
+  .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .photo-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; }
+  .pricing-item {
+    background: var(--white); padding: 32px 24px;
+    border-top: 4px solid var(--cream-dark);
+    transition: border-color 0.2s;
+  }
+  .pricing-item:hover { border-color: var(--orange); }
+  .pricing-item.featured { border-color: var(--orange); }
+  .pricing-size { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 8px; }
+  .pricing-amt { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--navy); letter-spacing: 1px; line-height: 1; }
+  .pricing-desc { font-size: 13px; color: var(--text-soft); margin-top: 8px; }
+  .pricing-badge { display: inline-block; background: var(--orange); color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; margin-bottom: 8px; }
+
+  /* ABOUT */
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .about-text p { font-size: 16px; color: var(--text-mid); line-height: 1.8; font-weight: 300; margin-bottom: 28px; }
+  .about-visual {
+    background: var(--navy); padding: 48px 36px; text-align: center;
+    position: relative;
+  }
+  .about-visual::after {
+    content: ''; position: absolute;
+    bottom: -8px; right: -8px;
+    width: 100%; height: 100%;
+    border: 2px solid var(--orange);
+    pointer-events: none;
+  }
+  .about-names { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--white); letter-spacing: 3px; line-height: 1; }
+  .about-names span { color: var(--orange); }
+  .about-since { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 12px; }
+
+  /* INCLUDES LIST */
+  .includes-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+  .includes-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--text-mid); }
+  .includes-list li::before { content: ''; display: inline-block; width: 20px; height: 20px; min-width: 20px; background: var(--navy); clip-path: polygon(20% 50%, 40% 70%, 80% 25%, 85% 30%, 40% 80%, 15% 55%); }
+
+  /* CONTACT */
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .contact-info { display: flex; flex-direction: column; gap: 24px; }
+  .contact-item h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
+  .contact-item a, .contact-item p { font-size: 20px; font-family: 'Lato', sans-serif; font-weight: 700; color: var(--navy); text-decoration: none; }
+  .contact-item a:hover { color: var(--orange); }
+  .contact-item .sub { font-size: 14px; font-weight: 300; color: var(--text-soft); margin-top: 2px; }
+
+  /* BOOK FORM */
+  .book-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .book-info h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--navy); letter-spacing: 1px; margin-bottom: 16px; }
+  .book-info p { font-size: 15px; color: var(--text-mid); line-height: 1.7; font-weight: 300; margin-bottom: 24px; }
+  .price-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .price-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .price-list li span:first-child { color: var(--text-mid); }
+  .price-list li span:last-child { font-weight: 700; color: var(--navy); }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); margin-bottom: 6px; }
+  .form-group input {
+    width: 100%; padding: 12px 16px;
+    border: 2px solid var(--cream-dark); border-radius: 0;
+    font-family: 'Lato', sans-serif; font-size: 15px; color: var(--text);
+    background: var(--white); outline: none;
+    transition: border-color 0.15s;
+  }
+  .form-group input:focus { border-color: var(--navy); }
+  .success-msg { display: none; background: var(--navy); color: var(--white); padding: 16px 20px; font-size: 14px; margin-top: 16px; font-weight: 700; letter-spacing: 0.5px; }
+
+  /* TRACKER */
+  .tracker-wrap { padding: 48px 32px; max-width: 1000px; margin: 0 auto; }
+  .tracker-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  .tracker-head h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1px; color: var(--navy); }
+  .t-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 24px; }
+  .t-stat { background: var(--navy); padding: 20px; }
+  .t-stat-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+  .t-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--white); letter-spacing: 1px; line-height: 1; }
+  .t-add { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .t-add input { flex: 1; min-width: 130px; padding: 10px 14px; border: 2px solid var(--cream-dark); border-radius: 0; font-family: 'Lato', sans-serif; font-size: 13px; color: var(--text); background: var(--white); outline: none; }
+  .t-add input:focus { border-color: var(--navy); }
+  .t-filters { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+  .t-filter { padding: 6px 16px; border: 2px solid var(--cream-dark); background: transparent; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; color: var(--text-soft); font-family: 'Lato', sans-serif; transition: all 0.15s; }
+  .t-filter.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+  .t-table-wrap { overflow-x: auto; background: var(--white); border: 2px solid var(--cream-dark); }
   table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 520px; }
-  th { text-align: left; font-size: 11px; font-weight: 500; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg); }
-  td { padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  th { text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-soft); padding: 12px 16px; border-bottom: 2px solid var(--cream-dark); background: var(--cream); }
+  td { padding: 13px 16px; border-bottom: 1px solid var(--cream-dark); vertical-align: middle; }
   tr:last-child td { border-bottom: none; }
-  .status-sel { font-size: 12px; border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; background: var(--bg); color: var(--text); cursor: pointer; font-family: 'DM Sans', sans-serif; }
-  .del-btn { background: none; border: none; color: var(--text-soft); cursor: pointer; font-size: 16px; padding: 2px 6px; border-radius: 4px; }
-  .del-btn:hover { color: #E24B4A; background: var(--red-bg); }
-  .empty-state { color: var(--text-soft); font-size: 14px; text-align: center; padding: 36px; }
-  .export-btn { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--text-mid); }
-  .export-btn:hover { background: var(--bg); }
-  footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--text-soft); font-size: 13px; }
-  footer a { color: var(--coral); text-decoration: none; }
-  .team-login { color: var(--text-soft); cursor: pointer; font-size: 13px; background: none; border: none; font-family: 'DM Sans', sans-serif; }
-  .team-login:hover { color: var(--text); }
-  @media (max-width: 640px) {
+  .status-sel { font-size: 12px; border: 2px solid var(--cream-dark); padding: 4px 8px; background: var(--cream); color: var(--text); cursor: pointer; font-family: 'Lato', sans-serif; }
+  .del-btn { background: none; border: none; color: var(--text-soft); cursor: pointer; font-size: 16px; padding: 2px 6px; }
+  .del-btn:hover { color: var(--orange); }
+  .t-empty { color: var(--text-soft); font-size: 14px; text-align: center; padding: 40px; }
+  .export-btn { background: var(--white); border: 2px solid var(--cream-dark); padding: 8px 18px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-family: 'Lato', sans-serif; cursor: pointer; color: var(--text-mid); transition: all 0.15s; }
+  .export-btn:hover { border-color: var(--navy); color: var(--navy); }
+
+  /* FOOTER */
+  footer { background: var(--navy); padding: 40px 32px; }
+  .footer-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); }
+  .footer-logo em { color: var(--orange); font-style: normal; }
+  .footer-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-links a:hover { color: var(--white); }
+  .team-login { background: none; border: none; font-size: 13px; color: rgba(255,255,255,0.2); cursor: pointer; font-family: 'Lato', sans-serif; }
+  .team-login:hover { color: rgba(255,255,255,0.5); }
+
+  @media (max-width: 680px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    .about-grid { grid-template-columns: 1fr; }
-    .stats-row { grid-template-columns: 1fr 1fr; }
-    .tracker-top { flex-direction: column; align-items: flex-start; }
+    .about-layout, .contact-layout, .book-layout { grid-template-columns: 1fr; }
+    .photo-grid { grid-template-columns: 1fr; }
+    .hero::before { display: none; }
+    .t-stats { grid-template-columns: 1fr 1fr; }
+    .about-visual::after { display: none; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo" onclick="goPage('home')">Weston <span>Grill</span> Co</div>
+  <div class="logo" onclick="goPage('home')">Weston <em>Grill</em> Co</div>
   <div class="nav-links">
     <a onclick="goPage('home')" id="nav-home" class="active">Home</a>
     <a onclick="goPage('book')" id="nav-book">Book</a>
@@ -127,91 +284,106 @@
 <!-- HOME -->
 <div id="page-home" class="page active">
   <div class="hero">
-    <div class="hero-badge">Weston, CT</div>
-    <h1>Your grill, spotless.<br>Ready to fire up.</h1>
-    <p>Professional grill cleaning — flat $120, no surprises. We come to you.</p>
-    <div class="hero-btns">
-      <button class="btn" onclick="goPage('book')">Make an appointment</button>
-      <button class="btn btn-outline" onclick="goPage('contact')">Get in touch</button>
-    </div>
-  </div>
-
-  <div class="divider">
-    <div class="section">
-      <div class="section-label">What we do</div>
-      <h2>Full grill cleaning, start to finish</h2>
-      <div class="cards">
-        <div class="card"><div class="card-icon">🔥</div><h3>Deep clean</h3><p>Grates, burners, drip trays — fully degreased and scrubbed down.</p></div>
-        <div class="card"><div class="card-icon">📍</div><h3>We come to you</h3><p>Just leave the grill out — we'll show up and get it done.</p></div>
+    <div class="hero-inner">
+      <div class="hero-tag">Weston, CT · Est. 2024</div>
+      <h1>Your Grill,<br><span>Spotless.</span></h1>
+      <p>Professional grill cleaning done right. We come to you, we do the dirty work, you fire up the grill.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="goPage('book')">Make an appointment</button>
+        <button class="btn-secondary" onclick="goPage('contact')">Get in touch</button>
       </div>
     </div>
   </div>
 
-  <div class="bg-white divider">
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">$80</div><div class="stat-label">Starting price</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">We come to you</div></div>
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Guys, 1 mission</div></div>
+  </div>
+
+  <div style="background: var(--cream);">
     <div class="section">
-      <div class="section-label">Fresh Off the Grill</div>
-      <h2>Our work</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
-        <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;">
-          <img src="https://i.imgur.com/7PTn5IO.jpeg" alt="Grill cleaning work" style="width:100%;height:100%;object-fit:cover;" />
+      <div class="section-tag">What we do</div>
+      <h2>Full Grill Cleaning,<br>Start to Finish</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <h3>Deep Clean</h3>
+          <p>Grates, burners, drip trays — fully degreased and scrubbed down to bare metal.</p>
         </div>
-        <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;">
-          <img src="https://i.imgur.com/4ZudRr3.jpeg" alt="Grill cleaning work" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <h3>We Come To You</h3>
+          <p>Leave the grill out. We show up, get it done, and leave everything clean.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <h3>No Hidden Fees</h3>
+          <p>The price you see is the price you pay. No surprises, no add-ons.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="bg-white divider">
+  <div style="background: var(--cream-dark);">
     <div class="section">
-      <div class="section-label">Pricing</div>
-      <h2>Simple, size-based pricing</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:28px;">
-        <div class="card" style="text-align:center;">
-          <div style="font-size:13px;font-weight:500;color:var(--text-soft);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Small</div>
-          <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:var(--coral);line-height:1;">$80</div>
-          <div style="font-size:13px;color:var(--text-soft);margin-top:6px;">1–2 burner</div>
-        </div>
-        <div class="card" style="text-align:center;border:2px solid var(--coral);">
-          <div style="font-size:11px;font-weight:500;background:var(--coral-light);color:var(--coral);padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px;">Most common</div>
-          <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:var(--coral);line-height:1;">$120</div>
-          <div style="font-size:13px;color:var(--text-soft);margin-top:6px;">3–4 burner</div>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div style="font-size:13px;font-weight:500;color:var(--text-soft);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Large</div>
-          <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:var(--coral);line-height:1;">$160</div>
-          <div style="font-size:13px;color:var(--text-soft);margin-top:6px;">5+ burner or built-in</div>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div style="font-size:13px;font-weight:500;color:var(--text-soft);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Smokers</div>
-          <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:var(--coral);line-height:1;">$150+</div>
-          <div style="font-size:13px;color:var(--text-soft);margin-top:6px;">Smokers &amp; specialty grills</div>
-        </div>
-      </div>
-      <div style="text-align:center;">
-        <ul class="pricing-features" style="max-width:340px;margin:0 auto 28px;">
-          <li><span class="check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#27500A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Grates, burners &amp; drip tray cleaned</li>
-          <li><span class="check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#27500A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Interior and exterior scrubbed</li>
-          <li><span class="check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#27500A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>We come to your home</li>
-          <li><span class="check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#27500A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>No hidden fees</li>
-        </ul>
-        <button class="btn" onclick="goPage('book')">Make an appointment</button>
-        <p style="margin-top:14px;font-size:13px;color:var(--text-soft)">Payment via Venmo · <a href="https://venmo.com/Aimee-Drummey" target="_blank" style="color:var(--coral)">@Aimee-Drummey</a></p>
+      <div class="section-tag">Fresh Off the Grill</div>
+      <h2>Our Work</h2>
+      <div class="photo-grid">
+        <img src="https://i.imgur.com/7PTn5IO.jpeg" alt="Grill cleaning work" />
+        <img src="https://i.imgur.com/4ZudRr3.jpeg" alt="Grill cleaning work" />
       </div>
     </div>
   </div>
 
-  <div class="divider">
+  <div style="background: var(--cream);">
     <div class="section">
-      <div class="about-grid">
-        <div style="font-size:64px;text-align:center;">🔥</div>
-        <div>
-          <div class="section-label">About us</div>
-          <h2>Wyatt &amp; Teddy</h2>
-          <p style="color:var(--text-mid);font-size:15px;line-height:1.7;margin-bottom:24px;">We've been friends since 5th grade. Last summer we started cleaning grills together, had a blast doing it, and haven't stopped since. Book us and we promise you'll get the cleanest grill on the block.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <button class="btn btn-outline" onclick="goPage('contact')">Say hello</button>
-            <a class="btn btn-outline" href="https://instagram.com/westongrillco" target="_blank">Instagram</a>
+      <div class="section-tag">Pricing</div>
+      <h2>Simple, Size-Based Pricing</h2>
+      <div class="pricing-grid">
+        <div class="pricing-item">
+          <div class="pricing-size">Small</div>
+          <div class="pricing-amt">$80</div>
+          <div class="pricing-desc">1–2 burner grills</div>
+        </div>
+        <div class="pricing-item featured">
+          <div class="pricing-badge">Most common</div>
+          <div class="pricing-size">Medium</div>
+          <div class="pricing-amt">$120</div>
+          <div class="pricing-desc">3–4 burner grills</div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-size">Large</div>
+          <div class="pricing-amt">$160</div>
+          <div class="pricing-desc">5+ burner or built-in</div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-size">Smokers</div>
+          <div class="pricing-amt">$150+</div>
+          <div class="pricing-desc">Smokers & specialty grills</div>
+        </div>
+      </div>
+      <div style="margin-top: 32px; text-align: center;">
+        <p style="font-size: 14px; color: var(--text-soft); margin-bottom: 20px;">Payment via Venmo · <a href="https://venmo.com/Aimee-Drummey" target="_blank" style="color: var(--navy); font-weight: 700;">@Aimee-Drummey</a></p>
+        <button class="btn-primary" onclick="goPage('book')">Make an appointment</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: var(--navy);">
+    <div class="section">
+      <div class="about-layout">
+        <div class="about-visual">
+          <div class="about-names">Wyatt<br><span>&</span><br>Teddy</div>
+          <div class="about-since">Friends since 5th grade</div>
+        </div>
+        <div class="about-text">
+          <div class="section-tag" style="color: var(--orange);">About Us</div>
+          <h2 style="color: var(--white);">Two Guys Who Love a Clean Grill</h2>
+          <p style="color: rgba(255,255,255,0.6);">We've been friends since 5th grade. Last summer we started cleaning grills together, had a blast doing it, and haven't stopped since. Book us and we promise you'll get the cleanest grill on the block.</p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="goPage('contact')">Say hello</button>
+            <a class="btn-secondary" href="https://instagram.com/westongrillco" target="_blank">Instagram</a>
           </div>
         </div>
       </div>
@@ -219,104 +391,163 @@
   </div>
 
   <footer>
-    © 2025 Weston Grill Co · Weston, CT · <a href="tel:2033137538">(203) 313-7538</a>
-    &nbsp;·&nbsp;
-    <button class="team-login" onclick="openTracker()">Team login</button>
+    <div class="footer-inner">
+      <div class="footer-logo">Weston <em>Grill</em> Co</div>
+      <div class="footer-links">
+        <a href="tel:2033137538">(203) 313-7538</a>
+        <a href="https://instagram.com/westongrillco" target="_blank">Instagram</a>
+        <button class="team-login" onclick="openTracker()">Team login</button>
+      </div>
+    </div>
   </footer>
 </div>
 
 <!-- BOOK -->
 <div id="page-book" class="page">
-  <div class="bg-white divider">
+  <div style="background: var(--navy); padding: 48px 32px 40px;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div class="hero-tag">Make an Appointment</div>
+      <h1 style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 64px); color: var(--white); letter-spacing: 2px; line-height: 1;">Schedule Your Grill Clean</h1>
+    </div>
+  </div>
+  <div style="background: var(--cream);">
     <div class="section">
-      <div class="section-label">Make an Appointment</div>
-      <h2>Schedule your grill clean</h2>
-      <div class="price-note">Small $80 · Medium $120 · Large $160 · Smokers $150+</div>
-      <div class="form-wrap">
-        <div class="form-row"><label>Your name</label><input type="text" id="f-name" placeholder="Jane Smith" /></div>
-        <div class="form-row"><label>Phone number</label><input type="tel" id="f-phone" placeholder="(203) 555-0123" /></div>
-        <div class="form-row"><label>Email</label><input type="email" id="f-email" placeholder="jane@email.com" /></div>
-        <div class="form-row"><label>Address</label><input type="text" id="f-addr" placeholder="123 Main St, Weston, CT" /></div>
-        <div class="form-row"><label>Preferred date</label><input type="date" id="f-date" /></div>
-        <button class="btn" onclick="submitBooking()" style="width:100%">Make an appointment — $120</button>
-        <div class="success-banner" id="success-banner">Booking submitted! We'll call or text to confirm your date. Payment of $120 via Venmo to @Aimee-Drummey once confirmed.</div>
-        <p style="margin-top:16px;font-size:13px;color:var(--text-soft)">Questions? Call or text us at <a href="tel:2033137538" style="color:var(--coral)">(203) 313-7538</a> or email <a href="mailto:westongrillcompany@gmail.com" style="color:var(--coral)">westongrillcompany@gmail.com</a></p>
+      <div class="book-layout">
+        <div class="book-info">
+          <h3>Pricing</h3>
+          <ul class="price-list">
+            <li><span>Small (1–2 burner)</span><span>$80</span></li>
+            <li><span>Medium (3–4 burner)</span><span>$120</span></li>
+            <li><span>Large (5+ or built-in)</span><span>$160</span></li>
+            <li><span>Smokers & specialty</span><span>$150+</span></li>
+          </ul>
+          <div style="margin-top: 24px; padding: 20px; background: var(--white); border-left: 4px solid var(--orange);">
+            <p style="font-size: 14px; color: var(--text-mid); line-height: 1.6;">Payment via Venmo to <strong>@Aimee-Drummey</strong> once your appointment is confirmed.</p>
+          </div>
+        </div>
+        <div>
+          <div class="form-group"><label>Your name</label><input type="text" id="f-name" placeholder="Jane Smith" /></div>
+          <div class="form-group"><label>Phone number</label><input type="tel" id="f-phone" placeholder="(203) 555-0123" /></div>
+          <div class="form-group"><label>Email</label><input type="email" id="f-email" placeholder="jane@email.com" /></div>
+          <div class="form-group"><label>Address</label><input type="text" id="f-addr" placeholder="123 Main St, Weston, CT" /></div>
+          <div class="form-group"><label>Preferred date</label><input type="date" id="f-date" /></div>
+          <button class="btn-primary" onclick="submitBooking()" style="width: 100%;">Request appointment</button>
+          <div class="success-msg" id="success-banner">Booking submitted! We'll call or text to confirm. Payment via Venmo @Aimee-Drummey once confirmed.</div>
+          <p style="margin-top: 16px; font-size: 13px; color: var(--text-soft);">Questions? Call or text <a href="tel:2033137538" style="color: var(--navy); font-weight: 700;">(203) 313-7538</a></p>
+        </div>
       </div>
     </div>
   </div>
-  <footer>© 2025 Weston Grill Co · Weston, CT · <a href="tel:2033137538">(203) 313-7538</a></footer>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Weston <em>Grill</em> Co</div>
+      <div class="footer-links"><a href="tel:2033137538">(203) 313-7538</a></div>
+    </div>
+  </footer>
 </div>
 
 <!-- CONTACT -->
 <div id="page-contact" class="page">
-  <div class="bg-white divider">
+  <div style="background: var(--navy); padding: 48px 32px 40px;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div class="hero-tag">Contact</div>
+      <h1 style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 64px); color: var(--white); letter-spacing: 2px; line-height: 1;">Get In Touch</h1>
+    </div>
+  </div>
+  <div style="background: var(--cream);">
     <div class="section">
-      <div class="section-label">Contact</div>
-      <h2>Get in touch</h2>
-      <p style="color:var(--text-mid);font-size:15px;margin-bottom:32px;">Happy to answer any questions before you book. Call or text anytime.</p>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <div class="contact-icon">📞</div>
-          <div><h4>Phone / text</h4><a href="tel:2033137538">(203) 313-7538</a></div>
+      <div class="contact-layout">
+        <div class="contact-info">
+          <div class="contact-item">
+            <h4>Phone / Text</h4>
+            <a href="tel:2033137538">(203) 313-7538</a>
+            <div class="sub">Call or text anytime</div>
+          </div>
+          <div class="contact-item">
+            <h4>Email</h4>
+            <a href="mailto:westongrillcompany@gmail.com">westongrillcompany@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <h4>Venmo</h4>
+            <a href="https://venmo.com/Aimee-Drummey" target="_blank">@Aimee-Drummey</a>
+          </div>
+          <div class="contact-item">
+            <h4>Instagram</h4>
+            <a href="https://instagram.com/westongrillco" target="_blank">@westongrillco</a>
+          </div>
+          <div class="contact-item">
+            <h4>Service Area</h4>
+            <p>Weston, CT &amp; surrounding towns</p>
+          </div>
         </div>
-        <div class="contact-card">
-          <div class="contact-icon">💸</div>
-          <div><h4>Venmo</h4><a href="https://venmo.com/Aimee-Drummey" target="_blank">@Aimee-Drummey</a></div>
+        <div style="background: var(--navy); padding: 48px 36px;">
+          <div class="section-tag" style="color: var(--orange);">Pricing</div>
+          <ul class="price-list" style="border-color: rgba(255,255,255,0.1);">
+            <li style="border-color: rgba(255,255,255,0.1);"><span style="color: rgba(255,255,255,0.5);">Small (1–2 burner)</span><span style="color: var(--white);">$80</span></li>
+            <li style="border-color: rgba(255,255,255,0.1);"><span style="color: rgba(255,255,255,0.5);">Medium (3–4 burner)</span><span style="color: var(--white);">$120</span></li>
+            <li style="border-color: rgba(255,255,255,0.1);"><span style="color: rgba(255,255,255,0.5);">Large (5+ or built-in)</span><span style="color: var(--white);">$160</span></li>
+            <li style="border-color: rgba(255,255,255,0.1);"><span style="color: rgba(255,255,255,0.5);">Smokers & specialty</span><span style="color: var(--white);">$150+</span></li>
+          </ul>
+          <div style="margin-top: 32px;">
+            <button class="btn-primary" onclick="goPage('book')" style="width: 100%;">Make an appointment</button>
+          </div>
         </div>
-        <div class="contact-card">
-          <div class="contact-icon">📍</div>
-          <div><h4>Service area</h4><p>Weston, CT &amp; surrounding towns</p></div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-icon">📸</div>
-          <div><h4>Instagram</h4><a href="https://instagram.com/westongrillco" target="_blank">@westongrillco</a></div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-icon">💵</div>
-          <div><h4>Pricing</h4><p>$80–$160 · Smokers $150+</p></div>
-        </div>
-      </div>
-      <div style="margin-top:36px">
-        <button class="btn" onclick="goPage('book')">Ready to book? Make an appointment</button>
       </div>
     </div>
   </div>
-  <footer>© 2025 Weston Grill Co · Weston, CT · <a href="tel:2033137538">(203) 313-7538</a></footer>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Weston <em>Grill</em> Co</div>
+      <div class="footer-links"><a href="tel:2033137538">(203) 313-7538</a></div>
+    </div>
+  </footer>
 </div>
 
 <!-- TRACKER -->
 <div id="page-tracker" class="page">
-  <div class="tracker-wrap">
-    <div class="tracker-top">
-      <h2>Job tracker</h2>
-      <button class="export-btn" onclick="exportCSV()">Export CSV</button>
-    </div>
-    <div class="stats-row">
-      <div class="stat"><div class="stat-label">Total bookings</div><div class="stat-val" id="s-total">0</div></div>
-      <div class="stat"><div class="stat-label">Upcoming</div><div class="stat-val" id="s-upcoming">0</div></div>
-      <div class="stat"><div class="stat-label">Completed</div><div class="stat-val" id="s-done">0</div></div>
-    </div>
-    <div class="add-row">
-      <input type="text" id="t-name" placeholder="Customer name" />
-      <input type="text" id="t-addr" placeholder="Address" />
-      <input type="date" id="t-date" />
-      <button class="btn btn-sm" onclick="addBooking()">+ Add</button>
-    </div>
-    <div class="filter-row">
-      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
-      <button class="filter-btn" onclick="setFilter('upcoming',this)">Upcoming</button>
-      <button class="filter-btn" onclick="setFilter('done',this)">Completed</button>
-      <button class="filter-btn" onclick="setFilter('cancelled',this)">Cancelled</button>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Customer</th><th>Address</th><th>Date</th><th>Status</th><th></th></tr></thead>
-        <tbody id="tbody"></tbody>
-      </table>
-      <div class="empty-state" id="empty-state" style="display:none">No bookings yet — add one above.</div>
+  <div style="background: var(--navy); padding: 48px 32px 40px;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div class="hero-tag">Internal</div>
+      <h1 style="font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--white); letter-spacing: 2px; line-height: 1;">Job Tracker</h1>
     </div>
   </div>
-  <footer>© 2025 Weston Grill Co · Weston, CT · <a href="tel:2033137538">(203) 313-7538</a></footer>
+  <div style="background: var(--cream);">
+    <div class="tracker-wrap">
+      <div class="tracker-head">
+        <h2>All Bookings</h2>
+        <button class="export-btn" onclick="exportCSV()">Export CSV</button>
+      </div>
+      <div class="t-stats">
+        <div class="t-stat"><div class="t-stat-label">Total</div><div class="t-stat-val" id="s-total">0</div></div>
+        <div class="t-stat"><div class="t-stat-label">Upcoming</div><div class="t-stat-val" id="s-upcoming">0</div></div>
+        <div class="t-stat"><div class="t-stat-label">Completed</div><div class="t-stat-val" id="s-done">0</div></div>
+      </div>
+      <div class="t-add">
+        <input type="text" id="t-name" placeholder="Customer name" />
+        <input type="text" id="t-addr" placeholder="Address" />
+        <input type="date" id="t-date" />
+        <button class="btn-primary" onclick="addBooking()" style="white-space:nowrap;padding:10px 20px;font-size:12px;">+ Add</button>
+      </div>
+      <div class="t-filters">
+        <button class="t-filter active" onclick="setFilter('all',this)">All</button>
+        <button class="t-filter" onclick="setFilter('upcoming',this)">Upcoming</button>
+        <button class="t-filter" onclick="setFilter('done',this)">Completed</button>
+        <button class="t-filter" onclick="setFilter('cancelled',this)">Cancelled</button>
+      </div>
+      <div class="t-table-wrap">
+        <table>
+          <thead><tr><th>Customer</th><th>Address</th><th>Date</th><th>Status</th><th></th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+        <div class="t-empty" id="empty-state" style="display:none">No bookings yet — add one above.</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Weston <em>Grill</em> Co</div>
+    </div>
+  </footer>
 </div>
 
 <script>
@@ -402,7 +633,7 @@ function updateStatus(id, val) {
 
 function setFilter(f, el) {
   currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.t-filter').forEach(function(b) { b.classList.remove('active'); });
   el.classList.add('active');
   render();
 }
@@ -434,4 +665,11 @@ function render() {
   if (!filtered.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
   empty.style.display = 'none';
   tbody.innerHTML = filtered.map(function(b) {
-    return '<tr><td style="font-weight:500">' + b.name + '</td><td style="color:var(--text-mid)">' + b.addr + '</td><td>' + fmtDate(b.date) + '</td><td><select class="status-sel" onchange="updateStatus(' + b.id + ',this.value)"><option value="upcoming"' + (b.status === 'upcoming' ? ' selected' : '') + '>Upcoming</option><option value="done"' + (b.status === 'done' ? ' selected' : '') + '>Completed</option><option value="cancelled"
+    return '<tr><td style="font-weight:700">' + b.name + '</td><td style="color:var(--text-soft)">' + b.addr + '</td><td>' + fmtDate(b.date) + '</td><td><select class="status-sel" onchange="updateStatus(' + b.id + ',this.value)"><option value="upcoming"' + (b.status === 'upcoming' ? ' selected' : '') + '>Upcoming</option><option value="done"' + (b.status === 'done' ? ' selected' : '') + '>Completed</option><option value="cancelled"' + (b.status === 'cancelled' ? ' selected' : '') + '>Cancelled</option></select></td><td style="text-align:right"><button class="del-btn" onclick="deleteBooking(' + b.id + ')">&#x2715;</button></td></tr>';
+  }).join('');
+}
+
+render();
+</script>
+</body>
+</html>
