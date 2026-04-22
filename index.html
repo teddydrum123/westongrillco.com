@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Weston Grill Co — Weston, CT</title>
+<title>Weston Grill Co — Weston CT</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -15,6 +16,7 @@
   --text-mid: #3d5278; --text-soft: #7a8fa8;
   --border: rgba(15,31,61,0.12);
   --green-bg: #EAF3DE; --green-text: #27500A;
+  --red-bg: #FCEBEB; --red-text: #791F1F;
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); font-size: 16px; line-height: 1.6; }
@@ -57,7 +59,7 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .service-card { background: var(--navy); padding: 36px 28px; position: relative; overflow: hidden; }
 .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
 .service-card:hover::before { transform: scaleX(1); }
-.service-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(255,255,255,0.07); line-height: 1; margin-bottom: -12px; }
+.service-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--white); line-height: 1; margin-bottom: -12px; }
 .service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: var(--white); margin-bottom: 10px; }
 .service-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; font-weight: 300; }
 .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
@@ -68,7 +70,7 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .pricing-item.featured { border-color: var(--orange); }
 .pricing-size { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 8px; }
 .pricing-amt { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--navy); letter-spacing: 1px; line-height: 1; }
-.pricing-desc { font-size: 13px; color: var(--text-soft); margin-top: 8px; }
+.pricing-desc { font-size: 14px; color: var(--text-soft); margin-top: 10px; line-height: 1.5; }
 .pricing-badge { display: inline-block; background: var(--orange); color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; margin-bottom: 8px; }
 .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .about-text p { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.8; font-weight: 300; margin-bottom: 28px; }
@@ -92,6 +94,7 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .form-group input { width: 100%; padding: 12px 16px; border: 2px solid var(--cream-dark); border-radius: 0; font-family: 'Lato', sans-serif; font-size: 15px; color: var(--text); background: var(--white); outline: none; transition: border-color 0.15s; }
 .form-group input:focus { border-color: var(--navy); }
 .success-msg { display: none; background: var(--green-bg); color: var(--green-text); padding: 16px 20px; font-size: 14px; margin-top: 16px; font-weight: 700; letter-spacing: 0.5px; }
+.error-msg { display: none; background: var(--red-bg); color: var(--red-text); padding: 16px 20px; font-size: 14px; margin-top: 16px; font-weight: 700; }
 .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 8px; }
 .slot-btn { background: var(--white); border: 2px solid var(--cream-dark); padding: 13px 10px; cursor: pointer; text-align: center; font-family: 'Lato', sans-serif; transition: all 0.15s; }
 .slot-btn:hover { border-color: var(--navy); }
@@ -100,6 +103,7 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .slot-time-lbl { font-size: 12px; color: var(--text-soft); display: block; margin-top: 3px; }
 .slot-btn.selected .slot-time-lbl { color: rgba(255,255,255,0.6); }
 .no-slots-notice { background: var(--cream-dark); padding: 22px 20px; font-size: 14px; color: var(--text-soft); text-align: center; }
+.slots-loading { padding: 22px 20px; font-size: 14px; color: var(--text-soft); text-align: center; }
 .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 .contact-info { display: flex; flex-direction: column; gap: 24px; }
 .contact-item h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
@@ -107,6 +111,9 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .contact-item a:hover { color: var(--orange); }
 .contact-item .sub { font-size: 14px; font-weight: 300; color: var(--text-soft); margin-top: 2px; }
 .contact-pricing { background: var(--navy); padding: 48px 36px; }
+.login-wrap { max-width: 400px; margin: 80px auto; padding: 0 32px; }
+.login-wrap h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; color: var(--navy); margin-bottom: 24px; }
+.login-error { display: none; background: var(--red-bg); color: var(--red-text); padding: 12px 16px; font-size: 14px; margin-bottom: 16px; font-weight: 700; }
 .tracker-wrap { padding: 48px 32px; max-width: 1000px; margin: 0 auto; }
 .t-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 32px; }
 .t-stat { background: var(--navy); padding: 20px; }
@@ -149,6 +156,8 @@ tr:last-child td { border-bottom: none; }
 .t-empty { color: var(--text-soft); font-size: 14px; text-align: center; padding: 40px; }
 .export-btn { background: var(--white); border: 2px solid var(--cream-dark); padding: 8px 18px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-family: 'Lato', sans-serif; cursor: pointer; color: var(--text-mid); transition: all 0.15s; }
 .export-btn:hover { border-color: var(--navy); color: var(--navy); }
+.signout-btn { background: none; border: none; font-size: 12px; color: rgba(255,255,255,0.3); cursor: pointer; font-family: 'Lato', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.signout-btn:hover { color: rgba(255,255,255,0.7); }
 footer { background: var(--navy); padding: 40px 32px; }
 .footer-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); }
@@ -190,7 +199,7 @@ footer { background: var(--navy); padding: 40px 32px; }
   <div class="hero">
     <div class="hero-inner">
       <div class="hero-tag">Weston, CT · Est. 2024</div>
-      <h1>Your Grill,<br><span>Spotless.</span></h1>
+      <h1>Your Grill<br><span>Spotless.</span></h1>
       <p>Professional grill cleaning done right. We come to you, we do the dirty work, you fire up the grill.</p>
       <div class="hero-btns">
         <button class="btn-primary" onclick="goPage('book')">Make an appointment</button>
@@ -229,8 +238,17 @@ footer { background: var(--navy); padding: 40px 32px; }
       <div class="section-tag">Pricing</div>
       <h2>Simple, Size-Based Pricing</h2>
       <div class="pricing-grid">
-        <div class="pricing-item featured"><div class="pricing-badge">Standard</div><div class="pricing-size">Medium Grill</div><div class="pricing-amt">$120</div><div class="pricing-desc">Most gas &amp; charcoal grills</div></div>
-        <div class="pricing-item"><div class="pricing-size">Large / Smoker</div><div class="pricing-amt">$150+</div><div class="pricing-desc">Large grills, smokers &amp; specialty</div></div>
+        <div class="pricing-item featured">
+          <div class="pricing-badge">Standard</div>
+          <div class="pricing-size">Medium Grill</div>
+          <div class="pricing-amt">$120</div>
+          <div class="pricing-desc">Most gas &amp; charcoal grills</div>
+        </div>
+        <div class="pricing-item">
+          <div class="pricing-size">Large / Smoker</div>
+          <div class="pricing-amt">$150+</div>
+          <div class="pricing-desc">Large grills, smokers<br>and specialty equipment</div>
+        </div>
       </div>
       <div style="margin-top:16px;text-align:center">
         <p style="font-size:14px;color:var(--text-soft);margin-bottom:20px">$120 most grills · $150+ large/smoker · Payment via Venmo <a href="https://venmo.com/Aimee-Drummey" target="_blank" style="color:var(--navy);font-weight:700">@Aimee-Drummey</a></p>
@@ -242,7 +260,7 @@ footer { background: var(--navy); padding: 40px 32px; }
     <div class="section">
       <div class="about-layout">
         <div class="about-visual">
-          <div class="about-names">Wyatt<br><span>&</span><br>Teddy</div>
+          <div class="about-names">Teddy<br><span>&</span><br>Wyatt</div>
           <div class="about-since">Friends since 5th grade</div>
         </div>
         <div class="about-text">
@@ -263,7 +281,7 @@ footer { background: var(--navy); padding: 40px 32px; }
       <div class="footer-links">
         <a href="tel:2033137538">(203) 313-7538</a>
         <a href="https://instagram.com/westongrillco" target="_blank">Instagram</a>
-        <button class="team-login" onclick="openTracker()">Team login</button>
+        <button class="team-login" onclick="goPage('login')">Team login</button>
       </div>
     </div>
   </footer>
@@ -291,7 +309,7 @@ footer { background: var(--navy); padding: 40px 32px; }
         <div>
           <div class="form-group">
             <label>Pick an available slot</label>
-            <div id="slot-picker"></div>
+            <div id="slot-picker"><div class="slots-loading">Loading available slots...</div></div>
           </div>
           <div class="form-group"><label>Your name</label><input type="text" id="f-name" placeholder="Jane Smith" /></div>
           <div class="form-group"><label>Phone number</label><input type="tel" id="f-phone" placeholder="(203) 555-0123" /></div>
@@ -299,6 +317,7 @@ footer { background: var(--navy); padding: 40px 32px; }
           <div class="form-group"><label>Address</label><input type="text" id="f-addr" placeholder="123 Main St, Weston, CT" /></div>
           <button class="btn-primary" onclick="submitBooking()" style="width:100%">Request appointment</button>
           <div class="success-msg" id="success-banner">Booking submitted! We'll call or text to confirm your slot. Payment via Venmo @Aimee-Drummey once confirmed.</div>
+          <div class="error-msg" id="book-error">Something went wrong — please try again or call us at (203) 313-7538.</div>
           <p style="margin-top:16px;font-size:13px;color:var(--text-soft)">Questions? Call or text <a href="tel:2033137538" style="color:var(--navy);font-weight:700">(203) 313-7538</a> or email <a href="mailto:westongrillcompany@gmail.com" style="color:var(--navy);font-weight:700">westongrillcompany@gmail.com</a></p>
         </div>
       </div>
@@ -346,11 +365,26 @@ footer { background: var(--navy); padding: 40px 32px; }
     </div>
   </footer>
 </div>
+<div id="page-login" class="page">
+  <div style="background:var(--cream);min-height:100vh">
+    <div class="login-wrap">
+      <h2>Team Login</h2>
+      <div class="login-error" id="login-error">Incorrect email or password.</div>
+      <div class="form-group"><label>Email</label><input type="email" id="l-email" placeholder="you@email.com" /></div>
+      <div class="form-group"><label>Password</label><input type="password" id="l-password" placeholder="••••••••" /></div>
+      <button class="btn-primary" onclick="doLogin()" style="width:100%">Sign in</button>
+      <p style="margin-top:16px;font-size:13px;color:var(--text-soft);text-align:center"><a href="#" onclick="goPage('home');return false;" style="color:var(--navy)">← Back to site</a></p>
+    </div>
+  </div>
+</div>
 <div id="page-tracker" class="page">
   <div class="page-header">
-    <div class="page-header-inner">
-      <div class="hero-tag">Internal</div>
-      <h1>Team Dashboard</h1>
+    <div class="page-header-inner" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="hero-tag">Internal</div>
+        <h1>Team Dashboard</h1>
+      </div>
+      <button class="signout-btn" onclick="doSignOut()">Sign out</button>
     </div>
   </div>
   <div style="background:var(--cream)">
@@ -399,13 +433,13 @@ footer { background: var(--navy); padding: 40px 32px; }
   </footer>
 </div>
 <script>
-var bookings = JSON.parse(localStorage.getItem('wgc-bookings') || '[]');
-var slots    = JSON.parse(localStorage.getItem('wgc-slots')    || '[]');
-var currentFilter  = 'all';
-var trackerUnlocked = false;
-var selectedSlotId  = null;
-function saveBookings() { localStorage.setItem('wgc-bookings', JSON.stringify(bookings)); }
-function saveSlots()    { localStorage.setItem('wgc-slots',    JSON.stringify(slots));    }
+var SUPABASE_URL = 'https://jpndxpixbfdkikkleutk.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_XAun4SVGnYueef3liZhpRg__y6MK44b';
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+var currentFilter = 'all';
+var selectedSlotId = null;
+var allBookings = [];
+var allSlots = [];
 function goPage(id) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
   document.querySelectorAll('.nav-links a').forEach(function(a){ a.classList.remove('active'); });
@@ -413,16 +447,8 @@ function goPage(id) {
   var n = document.getElementById('nav-' + id);
   if (n) n.classList.add('active');
   window.scrollTo(0, 0);
-  if (id === 'book')    renderSlotPicker();
-  if (id === 'tracker') { renderBookings(); renderSlotsGrid(); renderStats(); }
-}
-function openTracker() {
-  if (!trackerUnlocked) {
-    var pw = prompt('Enter password:');
-    if (pw !== 'Teddy0315') { alert('Incorrect password.'); return; }
-    trackerUnlocked = true;
-  }
-  goPage('tracker');
+  if (id === 'book') renderSlotPicker();
+  if (id === 'tracker') { loadBookings(); loadSlots(); }
 }
 function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
 function switchTab(tab, el) {
@@ -431,85 +457,121 @@ function switchTab(tab, el) {
   el.classList.add('active');
   document.getElementById('panel-' + tab).classList.add('active');
 }
+async function doLogin() {
+  var email = document.getElementById('l-email').value.trim();
+  var pass  = document.getElementById('l-password').value;
+  var err   = document.getElementById('login-error');
+  err.style.display = 'none';
+  var res = await sb.auth.signInWithPassword({ email: email, password: pass });
+  if (res.error) { err.style.display = 'block'; return; }
+  goPage('tracker');
+}
+async function doSignOut() { await sb.auth.signOut(); goPage('home'); }
 function fmtDate(d) { return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }); }
 function fmtTime(t) { var p=t.split(':'),h=parseInt(p[0],10),m=p[1],ampm=h>=12?'pm':'am'; h=h%12||12; return m==='00'?h+ampm:h+':'+m+ampm; }
 function fmtSlot(s) { return fmtDate(s.date) + ' at ' + fmtTime(s.time); }
-function renderSlotPicker() {
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+async function renderSlotPicker() {
   var el = document.getElementById('slot-picker');
   if (!el) return;
-  var open = slots.filter(function(s){ return !s.booked; });
-  open.sort(function(a,b){ return (a.date+a.time).localeCompare(b.date+b.time); });
-  if (!open.length) { selectedSlotId=null; el.innerHTML='<div class="no-slots-notice">No open slots right now — check back soon or <a href="#" onclick="goPage(\'contact\');return false;" style="color:var(--navy);font-weight:700">contact us</a> directly.</div>'; return; }
-  el.innerHTML = '<div class="slot-grid">'+open.map(function(s){ var sel=(selectedSlotId===s.id); return '<button class="slot-btn'+(sel?' selected':'')+'" onclick="selectSlot('+s.id+')">'+'<span class="slot-date-lbl">'+fmtDate(s.date)+'</span>'+'<span class="slot-time-lbl">'+fmtTime(s.time)+'</span>'+'</button>'; }).join('')+'</div>';
+  el.innerHTML = '<div class="slots-loading">Loading available slots...</div>';
+  var res = await sb.from('slots').select('*').eq('booked', false).order('date').order('time');
+  if (res.error || !res.data.length) {
+    selectedSlotId = null;
+    el.innerHTML = '<div class="no-slots-notice">No open slots right now — check back soon or <a href="#" onclick="goPage(\'contact\');return false;" style="color:var(--navy);font-weight:700">contact us</a> directly.</div>';
+    return;
+  }
+  el.innerHTML = '<div class="slot-grid">' + res.data.map(function(s){
+    var sel = (selectedSlotId === s.id);
+    return '<button class="slot-btn'+(sel?' selected':'')+'" onclick="selectSlot('+s.id+')">'
+      +'<span class="slot-date-lbl">'+fmtDate(s.date)+'</span>'
+      +'<span class="slot-time-lbl">'+fmtTime(s.time)+'</span>'
+      +'</button>';
+  }).join('') + '</div>';
 }
-function selectSlot(id) { selectedSlotId=id; renderSlotPicker(); }
-function submitBooking() {
+function selectSlot(id) { selectedSlotId = id; renderSlotPicker(); }
+async function submitBooking() {
   if (!selectedSlotId) { alert('Please select an available time slot.'); return; }
   var name=document.getElementById('f-name').value.trim(), phone=document.getElementById('f-phone').value.trim(), email=document.getElementById('f-email').value.trim(), addr=document.getElementById('f-addr').value.trim();
   if (!name||!phone||!email||!addr) { alert('Please fill in all fields.'); return; }
-  var slot=slots.find(function(s){ return s.id===selectedSlotId; });
-  if (!slot||slot.booked) { alert('That slot is no longer available. Please pick another.'); selectedSlotId=null; renderSlotPicker(); return; }
-  slot.booked=true; saveSlots();
-  bookings.push({ id:Date.now(), name:name, phone:phone, email:email, addr:addr, slotId:slot.id, slotLabel:fmtSlot(slot), date:slot.date, time:slot.time, status:'upcoming' });
-  saveBookings();
-  fetch('https://formspree.io/f/xeeprljo', { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify({ name:name, phone:phone, email:email, address:addr, slot:fmtSlot(slot), _replyto:email }) });
+  var slotRes = await sb.from('slots').select('*').eq('id', selectedSlotId).single();
+  if (slotRes.error || slotRes.data.booked) { alert('That slot was just taken. Please pick another.'); selectedSlotId=null; renderSlotPicker(); return; }
+  var slot = slotRes.data;
+  var label = fmtSlot(slot);
+  await sb.from('slots').update({ booked: true }).eq('id', slot.id);
+  var bRes = await sb.from('bookings').insert([{ id:Date.now(), name:name, phone:phone, email:email, addr:addr, slot_id:slot.id, slot_label:label, date:slot.date, time:slot.time, status:'upcoming' }]);
+  if (bRes.error) { document.getElementById('book-error').style.display='block'; await sb.from('slots').update({ booked:false }).eq('id', slot.id); return; }
+  fetch('https://formspree.io/f/xeeprljo', { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify({ name:name, phone:phone, email:email, address:addr, slot:label, _replyto:email }) });
   selectedSlotId=null;
   ['f-name','f-phone','f-email','f-addr'].forEach(function(id){ document.getElementById(id).value=''; });
   renderSlotPicker();
   var b=document.getElementById('success-banner'); b.style.display='block'; setTimeout(function(){ b.style.display='none'; },6000);
 }
-function addSlot() {
-  var date=document.getElementById('sl-date').value, time=document.getElementById('sl-time').value;
-  if (!date||!time) { alert('Please enter both a date and time.'); return; }
-  if (slots.find(function(s){ return s.date===date&&s.time===time; })) { alert('That slot already exists.'); return; }
-  slots.push({ id:Date.now(), date:date, time:time, booked:false });
-  slots.sort(function(a,b){ return (a.date+a.time).localeCompare(b.date+b.time); });
-  saveSlots();
-  document.getElementById('sl-date').value=''; document.getElementById('sl-time').value='';
-  renderSlotsGrid(); renderStats();
-}
-function deleteSlot(id) {
-  var s=slots.find(function(x){ return x.id===id; });
-  if (!confirm(s&&s.booked?'This slot has a booking. Remove it anyway?':'Remove this slot?')) return;
-  slots=slots.filter(function(x){ return x.id!==id; }); saveSlots(); renderSlotsGrid(); renderStats();
-}
-function renderSlotsGrid() {
-  var el=document.getElementById('slots-grid'); if (!el) return;
-  if (!slots.length) { el.innerHTML='<div class="slots-empty">No slots added yet — use the form above to add your availability.</div>'; return; }
-  el.innerHTML=slots.map(function(s){ return '<div class="slot-card'+(s.booked?' is-booked':'')+'">'+'<div class="slot-card-info"><div class="slot-card-date">'+fmtDate(s.date)+'</div><div class="slot-card-time">'+fmtTime(s.time)+'</div></div>'+'<div style="display:flex;align-items:center;gap:4px"><span class="slot-badge '+(s.booked?'booked':'open')+'">'+(s.booked?'Booked':'Open')+'</span><button class="slot-del" onclick="deleteSlot('+s.id+')" title="Remove">&#x2715;</button></div>'+'</div>'; }).join('');
+async function loadBookings() {
+  var res = await sb.from('bookings').select('*').order('date').order('time');
+  allBookings = res.data || [];
+  renderBookings(); renderStats();
 }
 function renderBookings() {
-  var filtered=bookings.filter(function(b){ return currentFilter==='all'?true:b.status===currentFilter; });
-  filtered.sort(function(a,b){ return (a.date+(a.time||'')).localeCompare(b.date+(b.time||'')); });
+  var filtered = allBookings.filter(function(b){ return currentFilter==='all'?true:b.status===currentFilter; });
   var tbody=document.getElementById('tbody'), empty=document.getElementById('empty-state');
   if (!tbody) return;
   if (!filtered.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
   empty.style.display='none';
-  tbody.innerHTML=filtered.map(function(b){ return '<tr><td style="font-weight:700">'+esc(b.name)+'</td><td style="font-size:13px;color:var(--text-soft)">'+esc(b.phone||'')+'</td><td style="font-size:13px;color:var(--text-soft)">'+esc(b.addr)+'</td><td style="font-size:13px">'+esc(b.slotLabel||(b.date?fmtDate(b.date):'—'))+'</td><td><select class="status-sel" onchange="updateStatus('+b.id+',this.value)"><option value="upcoming"'+(b.status==='upcoming'?' selected':'')+'>Upcoming</option><option value="done"'+(b.status==='done'?' selected':'')+'>Completed</option><option value="cancelled"'+(b.status==='cancelled'?' selected':'')+'>Cancelled</option></select></td><td style="text-align:right"><button class="del-btn" onclick="deleteBooking('+b.id+')">&#x2715;</button></td></tr>'; }).join('');
+  tbody.innerHTML=filtered.map(function(b){
+    return '<tr><td style="font-weight:700">'+esc(b.name)+'</td><td style="font-size:13px;color:var(--text-soft)">'+esc(b.phone)+'</td><td style="font-size:13px;color:var(--text-soft)">'+esc(b.addr)+'</td><td style="font-size:13px">'+esc(b.slot_label||(b.date?fmtDate(b.date):'—'))+'</td>'
+    +'<td><select class="status-sel" onchange="updateStatus('+b.id+',this.value)"><option value="upcoming"'+(b.status==='upcoming'?' selected':'')+'>Upcoming</option><option value="done"'+(b.status==='done'?' selected':'')+'>Completed</option><option value="cancelled"'+(b.status==='cancelled'?' selected':'')+'>Cancelled</option></select></td>'
+    +'<td style="text-align:right"><button class="del-btn" onclick="deleteBooking('+b.id+')">&#x2715;</button></td></tr>';
+  }).join('');
 }
-function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function renderStats() {
-  var ts=document.getElementById('s-total'), tu=document.getElementById('s-upcoming'), to=document.getElementById('s-open');
-  if (ts) ts.textContent=bookings.length;
-  if (tu) tu.textContent=bookings.filter(function(b){ return b.status==='upcoming'; }).length;
-  if (to) to.textContent=slots.filter(function(s){ return !s.booked; }).length;
-}
-function deleteBooking(id) {
+async function updateStatus(id,val) { await sb.from('bookings').update({status:val}).eq('id',id); allBookings=allBookings.map(function(b){ return b.id===id?Object.assign({},b,{status:val}):b; }); renderBookings(); renderStats(); }
+async function deleteBooking(id) {
   if (!confirm('Remove this booking?')) return;
-  var b=bookings.find(function(x){ return x.id===id; });
-  if (b&&b.slotId) { var sl=slots.find(function(s){ return s.id===b.slotId; }); if (sl) { sl.booked=false; saveSlots(); } }
-  bookings=bookings.filter(function(x){ return x.id!==id; }); saveBookings(); renderBookings(); renderStats();
+  var b=allBookings.find(function(x){ return x.id===id; });
+  if (b&&b.slot_id) await sb.from('slots').update({booked:false}).eq('id',b.slot_id);
+  await sb.from('bookings').delete().eq('id',id);
+  allBookings=allBookings.filter(function(x){ return x.id!==id; });
+  renderBookings(); renderStats();
 }
-function updateStatus(id,val) { bookings=bookings.map(function(b){ return b.id===id?Object.assign({},b,{status:val}):b; }); saveBookings(); renderBookings(); renderStats(); }
 function setFilter(f,el) { currentFilter=f; document.querySelectorAll('.t-filter').forEach(function(b){ b.classList.remove('active'); }); el.classList.add('active'); renderBookings(); }
+async function loadSlots() { var res=await sb.from('slots').select('*').order('date').order('time'); allSlots=res.data||[]; renderSlotsGrid(); renderStats(); }
+async function addSlot() {
+  var date=document.getElementById('sl-date').value, time=document.getElementById('sl-time').value;
+  if (!date||!time) { alert('Please enter both a date and time.'); return; }
+  if (allSlots.find(function(s){ return s.date===date&&s.time===time; })) { alert('That slot already exists.'); return; }
+  var newSlot={id:Date.now(),date:date,time:time,booked:false};
+  var res=await sb.from('slots').insert([newSlot]);
+  if (res.error) { alert('Error adding slot. Please try again.'); return; }
+  allSlots.push(newSlot); allSlots.sort(function(a,b){ return (a.date+a.time).localeCompare(b.date+b.time); });
+  document.getElementById('sl-date').value=''; document.getElementById('sl-time').value='';
+  renderSlotsGrid(); renderStats();
+}
+async function deleteSlot(id) {
+  var s=allSlots.find(function(x){ return x.id===id; });
+  if (!confirm(s&&s.booked?'This slot has a booking. Remove it anyway?':'Remove this slot?')) return;
+  await sb.from('slots').delete().eq('id',id);
+  allSlots=allSlots.filter(function(x){ return x.id!==id; });
+  renderSlotsGrid(); renderStats();
+}
+function renderSlotsGrid() {
+  var el=document.getElementById('slots-grid'); if (!el) return;
+  if (!allSlots.length) { el.innerHTML='<div class="slots-empty">No slots added yet — use the form above to add your availability.</div>'; return; }
+  el.innerHTML=allSlots.map(function(s){ return '<div class="slot-card'+(s.booked?' is-booked':'')+'">'+'<div class="slot-card-info"><div class="slot-card-date">'+fmtDate(s.date)+'</div><div class="slot-card-time">'+fmtTime(s.time)+'</div></div>'+'<div style="display:flex;align-items:center;gap:4px"><span class="slot-badge '+(s.booked?'booked':'open')+'">'+(s.booked?'Booked':'Open')+'</span><button class="slot-del" onclick="deleteSlot('+s.id+')" title="Remove">&#x2715;</button></div></div>'; }).join('');
+}
+function renderStats() {
+  var ts=document.getElementById('s-total'),tu=document.getElementById('s-upcoming'),to=document.getElementById('s-open');
+  if (ts) ts.textContent=allBookings.length;
+  if (tu) tu.textContent=allBookings.filter(function(b){ return b.status==='upcoming'; }).length;
+  if (to) to.textContent=allSlots.filter(function(s){ return !s.booked; }).length;
+}
 function exportCSV() {
-  if (!bookings.length) { alert('No bookings to export.'); return; }
+  if (!allBookings.length) { alert('No bookings to export.'); return; }
   var rows=[['Name','Phone','Email','Address','Slot','Status']];
-  bookings.forEach(function(b){ rows.push([b.name,b.phone||'',b.email||'',b.addr,b.slotLabel||(b.date||''),b.status]); });
+  allBookings.forEach(function(b){ rows.push([b.name,b.phone||'',b.email||'',b.addr,b.slot_label||(b.date||''),b.status]); });
   var csv=rows.map(function(r){ return r.map(function(c){ return '"'+String(c).replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
   var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='weston-grill-bookings.csv'; a.click();
 }
-renderStats();
+renderSlotPicker();
 </script>
 </body>
 </html>
