@@ -20,7 +20,6 @@
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); font-size: 16px; line-height: 1.6; }
-
 nav { background: var(--navy); padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--orange); }
 .logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: var(--white); cursor: pointer; }
 .logo em { color: var(--orange); font-style: normal; }
@@ -33,35 +32,24 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .mobile-menu.open { display: flex; }
 .mobile-menu a { font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.85); padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); cursor: pointer; text-decoration: none; display: block; }
 .mobile-menu a:last-child { border-bottom: none; }
-
 .page { display: none; }
 .page.active { display: block; }
-
 .hero { background: var(--navy); padding: 80px 32px 72px; position: relative; overflow: hidden; }
 .hero::before { content: 'GRILL'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: 'Bebas Neue', sans-serif; font-size: 220px; color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; user-select: none; }
 .hero-inner { max-width: 680px; }
 .hero-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; border-left: 3px solid var(--orange); padding-left: 10px; }
 .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 88px); color: var(--white); line-height: 0.95; letter-spacing: 2px; margin-bottom: 24px; }
 .hero h1 span { color: var(--orange); }
-.hero p { font-size: 17px; color: rgba(255,255,255,0.65); max-width: 440px; margin-bottom: 36px; font-weight: 300; line-height: 1.7; }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-
 .btn-primary { background: var(--orange); color: var(--white); font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 32px; border: none; border-radius: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.15s, transform 0.1s; }
 .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
 .btn-primary:active { transform: translateY(0); }
 .btn-secondary { background: transparent; color: var(--white); font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 32px; border: 2px solid rgba(255,255,255,0.3); border-radius: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.15s, background 0.15s; }
 .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
-
-.stats-bar { background: var(--orange); display: flex; align-items: center; justify-content: center; gap: 48px; padding: 18px 32px; flex-wrap: wrap; }
-.stat-item { text-align: center; }
-.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--white); letter-spacing: 1px; line-height: 1; }
-.stat-lbl { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-top: 2px; }
-
 .section { padding: 72px 32px; max-width: 1000px; margin: 0 auto; }
 .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
 .section-tag::after { content: ''; display: block; height: 2px; width: 32px; background: var(--orange); }
 .section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 52px); letter-spacing: 1px; color: var(--navy); margin-bottom: 40px; line-height: 1; }
-
 .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; }
 .service-card { background: var(--navy); padding: 36px 28px; position: relative; overflow: hidden; }
 .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
@@ -69,10 +57,8 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .service-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--white); line-height: 1; margin-bottom: -12px; }
 .service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: var(--white); margin-bottom: 10px; }
 .service-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; font-weight: 300; }
-
 .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
 .photo-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
-
 .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-bottom: 32px; }
 .pricing-item { background: var(--white); padding: 32px 24px; border-top: 4px solid var(--cream-dark); transition: border-color 0.2s; }
 .pricing-item:hover { border-color: var(--orange); }
@@ -81,7 +67,6 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .pricing-amt { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--navy); letter-spacing: 1px; line-height: 1; }
 .pricing-desc { font-size: 14px; color: var(--text-soft); margin-top: 10px; line-height: 1.5; }
 .pricing-badge { display: inline-block; background: var(--orange); color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; margin-bottom: 8px; }
-
 .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .about-text p { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.8; font-weight: 300; margin-bottom: 28px; }
 .about-visual { background: var(--navy-mid); padding: 48px 36px; text-align: center; position: relative; }
@@ -89,11 +74,9 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .about-names { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--white); letter-spacing: 3px; line-height: 1; }
 .about-names span { color: var(--orange); }
 .about-since { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 12px; }
-
 .page-header { background: var(--navy); padding: 48px 32px 40px; }
 .page-header-inner { max-width: 1000px; margin: 0 auto; }
 .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 64px); color: var(--white); letter-spacing: 2px; line-height: 1; }
-
 .book-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 .book-info h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--navy); letter-spacing: 1px; margin-bottom: 16px; }
 .price-list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-bottom: 28px; }
@@ -107,7 +90,6 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .form-group input:focus { border-color: var(--navy); }
 .success-msg { display: none; background: var(--green-bg); color: var(--green-text); padding: 16px 20px; font-size: 14px; margin-top: 16px; font-weight: 700; letter-spacing: 0.5px; }
 .error-msg { display: none; background: var(--red-bg); color: var(--red-text); padding: 16px 20px; font-size: 14px; margin-top: 16px; font-weight: 700; }
-
 .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 8px; }
 .slot-btn { background: var(--white); border: 2px solid var(--cream-dark); padding: 13px 10px; cursor: pointer; text-align: center; font-family: 'Lato', sans-serif; transition: all 0.15s; }
 .slot-btn:hover { border-color: var(--navy); }
@@ -117,7 +99,6 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .slot-btn.selected .slot-time-lbl { color: rgba(255,255,255,0.6); }
 .no-slots-notice { background: var(--cream-dark); padding: 22px 20px; font-size: 14px; color: var(--text-soft); text-align: center; }
 .slots-loading { padding: 22px 20px; font-size: 14px; color: var(--text-soft); text-align: center; }
-
 .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 .contact-info { display: flex; flex-direction: column; gap: 24px; }
 .contact-item h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
@@ -125,16 +106,10 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .contact-item a:hover { color: var(--orange); }
 .contact-item .sub { font-size: 14px; font-weight: 300; color: var(--text-soft); margin-top: 2px; }
 .contact-pricing { background: var(--navy); padding: 48px 36px; }
-
-/* LOGIN */
 .login-wrap { max-width: 400px; margin: 80px auto; padding: 0 32px; }
 .login-wrap h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; color: var(--navy); margin-bottom: 24px; }
 .login-error { display: none; background: var(--red-bg); color: var(--red-text); padding: 12px 16px; font-size: 14px; margin-bottom: 16px; font-weight: 700; }
-
-/* TRACKER */
 .tracker-wrap { padding: 48px 32px; max-width: 1000px; margin: 0 auto; }
-.tracker-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
-.tracker-topbar h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1px; color: var(--navy); }
 .t-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 32px; }
 .t-stat { background: var(--navy); padding: 20px; }
 .t-stat-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
@@ -178,7 +153,6 @@ tr:last-child td { border-bottom: none; }
 .export-btn:hover { border-color: var(--navy); color: var(--navy); }
 .signout-btn { background: none; border: none; font-size: 12px; color: rgba(255,255,255,0.3); cursor: pointer; font-family: 'Lato', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
 .signout-btn:hover { color: rgba(255,255,255,0.7); }
-
 footer { background: var(--navy); padding: 40px 32px; }
 .footer-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); }
@@ -188,7 +162,6 @@ footer { background: var(--navy); padding: 40px 32px; }
 .footer-links a:hover { color: var(--white); }
 .team-login { background: none; border: none; font-size: 13px; color: rgba(255,255,255,0.2); cursor: pointer; font-family: 'Lato', sans-serif; }
 .team-login:hover { color: rgba(255,255,255,0.5); }
-
 @media (max-width: 680px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
@@ -203,7 +176,6 @@ footer { background: var(--navy); padding: 40px 32px; }
 </style>
 </head>
 <body>
-
 <nav>
   <div class="logo" onclick="goPage('home')">Weston <em>Grill</em> Co</div>
   <div class="nav-links">
@@ -218,8 +190,6 @@ footer { background: var(--navy); padding: 40px 32px; }
   <a onclick="goPage('book');toggleMenu()">Book</a>
   <a onclick="goPage('contact');toggleMenu()">Contact</a>
 </div>
-
-<!-- HOME -->
 <div id="page-home" class="page active">
   <div class="hero">
     <div class="hero-inner">
@@ -232,7 +202,6 @@ footer { background: var(--navy); padding: 40px 32px; }
       </div>
     </div>
   </div>
-
   <div style="background:var(--cream)">
     <div class="section">
       <div class="section-tag">What we do</div>
@@ -306,8 +275,6 @@ footer { background: var(--navy); padding: 40px 32px; }
     </div>
   </footer>
 </div>
-
-<!-- BOOK -->
 <div id="page-book" class="page">
   <div class="page-header">
     <div class="page-header-inner">
@@ -352,8 +319,6 @@ footer { background: var(--navy); padding: 40px 32px; }
     </div>
   </footer>
 </div>
-
-<!-- CONTACT -->
 <div id="page-contact" class="page">
   <div class="page-header">
     <div class="page-header-inner">
@@ -389,8 +354,6 @@ footer { background: var(--navy); padding: 40px 32px; }
     </div>
   </footer>
 </div>
-
-<!-- LOGIN -->
 <div id="page-login" class="page">
   <div style="background:var(--cream);min-height:100vh">
     <div class="login-wrap">
@@ -403,8 +366,6 @@ footer { background: var(--navy); padding: 40px 32px; }
     </div>
   </div>
 </div>
-
-<!-- TRACKER -->
 <div id="page-tracker" class="page">
   <div class="page-header">
     <div class="page-header-inner" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
@@ -460,19 +421,14 @@ footer { background: var(--navy); padding: 40px 32px; }
     </div>
   </footer>
 </div>
-
 <script>
-// ── SUPABASE SETUP ───────────────────────────────────
 var SUPABASE_URL = 'https://jpndxpixbfdkikkleutk.supabase.co';
 var SUPABASE_KEY = 'sb_publishable_XAun4SVGnYueef3liZhpRg__y6MK44b';
 var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
 var currentFilter = 'all';
 var selectedSlotId = null;
 var allBookings = [];
 var allSlots = [];
-
-// ── NAVIGATION ───────────────────────────────────────
 function goPage(id) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
   document.querySelectorAll('.nav-links a').forEach(function(a){ a.classList.remove('active'); });
@@ -483,7 +439,6 @@ function goPage(id) {
   if (id === 'book') renderSlotPicker();
   if (id === 'tracker') { loadBookings(); loadSlots(); }
 }
-
 function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
 function switchTab(tab, el) {
   document.querySelectorAll('.t-tab').forEach(function(b){ b.classList.remove('active'); });
@@ -491,8 +446,6 @@ function switchTab(tab, el) {
   el.classList.add('active');
   document.getElementById('panel-' + tab).classList.add('active');
 }
-
-// ── AUTH ─────────────────────────────────────────────
 async function doLogin() {
   var email = document.getElementById('l-email').value.trim();
   var pass  = document.getElementById('l-password').value;
@@ -502,26 +455,11 @@ async function doLogin() {
   if (res.error) { err.style.display = 'block'; return; }
   goPage('tracker');
 }
-
-async function doSignOut() {
-  await sb.auth.signOut();
-  goPage('home');
-}
-
-// Check if already logged in when opening tracker
-async function openTracker() {
-  var session = await sb.auth.getSession();
-  if (session.data.session) { goPage('tracker'); }
-  else { goPage('login'); }
-}
-
-// ── HELPERS ──────────────────────────────────────────
+async function doSignOut() { await sb.auth.signOut(); goPage('home'); }
 function fmtDate(d) { return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }); }
 function fmtTime(t) { var p=t.split(':'),h=parseInt(p[0],10),m=p[1],ampm=h>=12?'pm':'am'; h=h%12||12; return m==='00'?h+ampm:h+':'+m+ampm; }
 function fmtSlot(s) { return fmtDate(s.date) + ' at ' + fmtTime(s.time); }
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-// ── SLOT PICKER (public) ─────────────────────────────
 async function renderSlotPicker() {
   var el = document.getElementById('slot-picker');
   if (!el) return;
@@ -540,168 +478,81 @@ async function renderSlotPicker() {
       +'</button>';
   }).join('') + '</div>';
 }
-
 function selectSlot(id) { selectedSlotId = id; renderSlotPicker(); }
-
-// ── SUBMIT BOOKING (public) ──────────────────────────
 async function submitBooking() {
   if (!selectedSlotId) { alert('Please select an available time slot.'); return; }
-  var name  = document.getElementById('f-name').value.trim();
-  var phone = document.getElementById('f-phone').value.trim();
-  var email = document.getElementById('f-email').value.trim();
-  var addr  = document.getElementById('f-addr').value.trim();
+  var name=document.getElementById('f-name').value.trim(), phone=document.getElementById('f-phone').value.trim(), email=document.getElementById('f-email').value.trim(), addr=document.getElementById('f-addr').value.trim();
   if (!name||!phone||!email||!addr) { alert('Please fill in all fields.'); return; }
-
-  // Check slot still open
   var slotRes = await sb.from('slots').select('*').eq('id', selectedSlotId).single();
-  if (slotRes.error || slotRes.data.booked) {
-    alert('That slot was just taken. Please pick another.');
-    selectedSlotId = null; renderSlotPicker(); return;
-  }
+  if (slotRes.error || slotRes.data.booked) { alert('That slot was just taken. Please pick another.'); selectedSlotId=null; renderSlotPicker(); return; }
   var slot = slotRes.data;
   var label = fmtSlot(slot);
-
-  // Mark slot booked
   await sb.from('slots').update({ booked: true }).eq('id', slot.id);
-
-  // Insert booking
-  var bRes = await sb.from('bookings').insert([{
-    id: Date.now(), name: name, phone: phone, email: email, addr: addr,
-    slot_id: slot.id, slot_label: label,
-    date: slot.date, time: slot.time, status: 'upcoming'
-  }]);
-
-  if (bRes.error) {
-    document.getElementById('book-error').style.display = 'block';
-    // Undo slot mark
-    await sb.from('slots').update({ booked: false }).eq('id', slot.id);
-    return;
-  }
-
-  // Formspree notification
-  fetch('https://formspree.io/f/xeeprljo', {
-    method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body: JSON.stringify({ name:name, phone:phone, email:email, address:addr, slot:label, _replyto:email })
-  });
-
-  selectedSlotId = null;
+  var bRes = await sb.from('bookings').insert([{ id:Date.now(), name:name, phone:phone, email:email, addr:addr, slot_id:slot.id, slot_label:label, date:slot.date, time:slot.time, status:'upcoming' }]);
+  if (bRes.error) { document.getElementById('book-error').style.display='block'; await sb.from('slots').update({ booked:false }).eq('id', slot.id); return; }
+  fetch('https://formspree.io/f/xeeprljo', { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify({ name:name, phone:phone, email:email, address:addr, slot:label, _replyto:email }) });
+  selectedSlotId=null;
   ['f-name','f-phone','f-email','f-addr'].forEach(function(id){ document.getElementById(id).value=''; });
   renderSlotPicker();
-  var b = document.getElementById('success-banner');
-  b.style.display = 'block';
-  setTimeout(function(){ b.style.display='none'; }, 6000);
+  var b=document.getElementById('success-banner'); b.style.display='block'; setTimeout(function(){ b.style.display='none'; },6000);
 }
-
-// ── LOAD BOOKINGS (team) ─────────────────────────────
 async function loadBookings() {
   var res = await sb.from('bookings').select('*').order('date').order('time');
   allBookings = res.data || [];
-  renderBookings();
-  renderStats();
+  renderBookings(); renderStats();
 }
-
 function renderBookings() {
-  var filtered = allBookings.filter(function(b){ return currentFilter==='all' ? true : b.status===currentFilter; });
-  var tbody = document.getElementById('tbody');
-  var empty = document.getElementById('empty-state');
+  var filtered = allBookings.filter(function(b){ return currentFilter==='all'?true:b.status===currentFilter; });
+  var tbody=document.getElementById('tbody'), empty=document.getElementById('empty-state');
   if (!tbody) return;
   if (!filtered.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
-  empty.style.display = 'none';
-  tbody.innerHTML = filtered.map(function(b){
-    return '<tr>'
-      +'<td style="font-weight:700">'+esc(b.name)+'</td>'
-      +'<td style="font-size:13px;color:var(--text-soft)">'+esc(b.phone)+'</td>'
-      +'<td style="font-size:13px;color:var(--text-soft)">'+esc(b.addr)+'</td>'
-      +'<td style="font-size:13px">'+esc(b.slot_label||(b.date?fmtDate(b.date):'—'))+'</td>'
-      +'<td><select class="status-sel" onchange="updateStatus('+b.id+',this.value)">'
-        +'<option value="upcoming"'+(b.status==='upcoming'?' selected':'')+'>Upcoming</option>'
-        +'<option value="done"'+(b.status==='done'?' selected':'')+'>Completed</option>'
-        +'<option value="cancelled"'+(b.status==='cancelled'?' selected':'')+'>Cancelled</option>'
-      +'</select></td>'
-      +'<td style="text-align:right"><button class="del-btn" onclick="deleteBooking('+b.id+')">&#x2715;</button></td>'
-    +'</tr>';
+  empty.style.display='none';
+  tbody.innerHTML=filtered.map(function(b){
+    return '<tr><td style="font-weight:700">'+esc(b.name)+'</td><td style="font-size:13px;color:var(--text-soft)">'+esc(b.phone)+'</td><td style="font-size:13px;color:var(--text-soft)">'+esc(b.addr)+'</td><td style="font-size:13px">'+esc(b.slot_label||(b.date?fmtDate(b.date):'—'))+'</td>'
+    +'<td><select class="status-sel" onchange="updateStatus('+b.id+',this.value)"><option value="upcoming"'+(b.status==='upcoming'?' selected':'')+'>Upcoming</option><option value="done"'+(b.status==='done'?' selected':'')+'>Completed</option><option value="cancelled"'+(b.status==='cancelled'?' selected':'')+'>Cancelled</option></select></td>'
+    +'<td style="text-align:right"><button class="del-btn" onclick="deleteBooking('+b.id+')">&#x2715;</button></td></tr>';
   }).join('');
 }
-
-async function updateStatus(id, val) {
-  await sb.from('bookings').update({ status: val }).eq('id', id);
-  allBookings = allBookings.map(function(b){ return b.id===id ? Object.assign({},b,{status:val}) : b; });
-  renderBookings(); renderStats();
-}
-
+async function updateStatus(id,val) { await sb.from('bookings').update({status:val}).eq('id',id); allBookings=allBookings.map(function(b){ return b.id===id?Object.assign({},b,{status:val}):b; }); renderBookings(); renderStats(); }
 async function deleteBooking(id) {
   if (!confirm('Remove this booking?')) return;
-  var b = allBookings.find(function(x){ return x.id===id; });
-  if (b && b.slot_id) await sb.from('slots').update({ booked: false }).eq('id', b.slot_id);
-  await sb.from('bookings').delete().eq('id', id);
-  allBookings = allBookings.filter(function(x){ return x.id!==id; });
+  var b=allBookings.find(function(x){ return x.id===id; });
+  if (b&&b.slot_id) await sb.from('slots').update({booked:false}).eq('id',b.slot_id);
+  await sb.from('bookings').delete().eq('id',id);
+  allBookings=allBookings.filter(function(x){ return x.id!==id; });
   renderBookings(); renderStats();
 }
-
-function setFilter(f, el) {
-  currentFilter = f;
-  document.querySelectorAll('.t-filter').forEach(function(b){ b.classList.remove('active'); });
-  el.classList.add('active');
-  renderBookings();
-}
-
-// ── LOAD SLOTS (team) ────────────────────────────────
-async function loadSlots() {
-  var res = await sb.from('slots').select('*').order('date').order('time');
-  allSlots = res.data || [];
-  renderSlotsGrid();
-  renderStats();
-}
-
+function setFilter(f,el) { currentFilter=f; document.querySelectorAll('.t-filter').forEach(function(b){ b.classList.remove('active'); }); el.classList.add('active'); renderBookings(); }
+async function loadSlots() { var res=await sb.from('slots').select('*').order('date').order('time'); allSlots=res.data||[]; renderSlotsGrid(); renderStats(); }
 async function addSlot() {
-  var date = document.getElementById('sl-date').value;
-  var time = document.getElementById('sl-time').value;
+  var date=document.getElementById('sl-date').value, time=document.getElementById('sl-time').value;
   if (!date||!time) { alert('Please enter both a date and time.'); return; }
-  var dup = allSlots.find(function(s){ return s.date===date && s.time===time; });
-  if (dup) { alert('That slot already exists.'); return; }
-  var newSlot = { id: Date.now(), date: date, time: time, booked: false };
-  var res = await sb.from('slots').insert([newSlot]);
+  if (allSlots.find(function(s){ return s.date===date&&s.time===time; })) { alert('That slot already exists.'); return; }
+  var newSlot={id:Date.now(),date:date,time:time,booked:false};
+  var res=await sb.from('slots').insert([newSlot]);
   if (res.error) { alert('Error adding slot. Please try again.'); return; }
-  allSlots.push(newSlot);
-  allSlots.sort(function(a,b){ return (a.date+a.time).localeCompare(b.date+b.time); });
-  document.getElementById('sl-date').value='';
-  document.getElementById('sl-time').value='';
+  allSlots.push(newSlot); allSlots.sort(function(a,b){ return (a.date+a.time).localeCompare(b.date+b.time); });
+  document.getElementById('sl-date').value=''; document.getElementById('sl-time').value='';
   renderSlotsGrid(); renderStats();
 }
-
 async function deleteSlot(id) {
-  var s = allSlots.find(function(x){ return x.id===id; });
-  var msg = s&&s.booked ? 'This slot has a booking. Remove it anyway?' : 'Remove this slot?';
-  if (!confirm(msg)) return;
-  await sb.from('slots').delete().eq('id', id);
-  allSlots = allSlots.filter(function(x){ return x.id!==id; });
+  var s=allSlots.find(function(x){ return x.id===id; });
+  if (!confirm(s&&s.booked?'This slot has a booking. Remove it anyway?':'Remove this slot?')) return;
+  await sb.from('slots').delete().eq('id',id);
+  allSlots=allSlots.filter(function(x){ return x.id!==id; });
   renderSlotsGrid(); renderStats();
 }
-
 function renderSlotsGrid() {
-  var el = document.getElementById('slots-grid'); if (!el) return;
+  var el=document.getElementById('slots-grid'); if (!el) return;
   if (!allSlots.length) { el.innerHTML='<div class="slots-empty">No slots added yet — use the form above to add your availability.</div>'; return; }
-  el.innerHTML = allSlots.map(function(s){
-    return '<div class="slot-card'+(s.booked?' is-booked':'')+'">'
-      +'<div class="slot-card-info">'
-        +'<div class="slot-card-date">'+fmtDate(s.date)+'</div>'
-        +'<div class="slot-card-time">'+fmtTime(s.time)+'</div>'
-      +'</div>'
-      +'<div style="display:flex;align-items:center;gap:4px">'
-        +'<span class="slot-badge '+(s.booked?'booked':'open')+'">'+(s.booked?'Booked':'Open')+'</span>'
-        +'<button class="slot-del" onclick="deleteSlot('+s.id+')" title="Remove">&#x2715;</button>'
-      +'</div>'
-    +'</div>';
-  }).join('');
+  el.innerHTML=allSlots.map(function(s){ return '<div class="slot-card'+(s.booked?' is-booked':'')+'">'+'<div class="slot-card-info"><div class="slot-card-date">'+fmtDate(s.date)+'</div><div class="slot-card-time">'+fmtTime(s.time)+'</div></div>'+'<div style="display:flex;align-items:center;gap:4px"><span class="slot-badge '+(s.booked?'booked':'open')+'">'+(s.booked?'Booked':'Open')+'</span><button class="slot-del" onclick="deleteSlot('+s.id+')" title="Remove">&#x2715;</button></div></div>'; }).join('');
 }
-
 function renderStats() {
-  var ts=document.getElementById('s-total'), tu=document.getElementById('s-upcoming'), to=document.getElementById('s-open');
-  if (ts) ts.textContent = allBookings.length;
-  if (tu) tu.textContent = allBookings.filter(function(b){ return b.status==='upcoming'; }).length;
-  if (to) to.textContent = allSlots.filter(function(s){ return !s.booked; }).length;
+  var ts=document.getElementById('s-total'),tu=document.getElementById('s-upcoming'),to=document.getElementById('s-open');
+  if (ts) ts.textContent=allBookings.length;
+  if (tu) tu.textContent=allBookings.filter(function(b){ return b.status==='upcoming'; }).length;
+  if (to) to.textContent=allSlots.filter(function(s){ return !s.booked; }).length;
 }
-
 function exportCSV() {
   if (!allBookings.length) { alert('No bookings to export.'); return; }
   var rows=[['Name','Phone','Email','Address','Slot','Status']];
@@ -709,9 +560,6 @@ function exportCSV() {
   var csv=rows.map(function(r){ return r.map(function(c){ return '"'+String(c).replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
   var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='weston-grill-bookings.csv'; a.click();
 }
-
-// ── INIT ─────────────────────────────────────────────
-// Load slots for book page on start
 renderSlotPicker();
 </script>
 </body>
