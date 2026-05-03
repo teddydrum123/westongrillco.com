@@ -37,4 +37,755 @@ nav { background: var(--navy); padding: 0 32px; display: flex; align-items: cent
 .nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.1); }
 .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
 .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
-.mobile-menu { display: none; flex-direction: column; background: var(--navy-mid); border-bottom: 2px solid var(--
+.mobile-menu { display: none; flex-direction: column; background: var(--navy-mid); border-bottom: 2px solid var(--orange); }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.85); padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); cursor: pointer; text-decoration: none; display: block; }
+.mobile-menu a:last-child { border-bottom: none; }
+
+.page { display: none; }
+.page.active { display: block; }
+
+.hero { background: var(--navy); padding: 80px 32px 72px; position: relative; overflow: hidden; }
+.hero::before { content: 'GRILL'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: 'Bebas Neue', sans-serif; font-size: 220px; color: rgba(255,255,255,0.15); line-height: 1; pointer-events: none; user-select: none; }
+.hero-inner { max-width: 680px; }
+.hero-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; border-left: 3px solid var(--orange); padding-left: 10px; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 88px); color: var(--white); line-height: 0.95; letter-spacing: 2px; margin-bottom: 24px; }
+.hero h1 span { color: var(--orange); }
+.hero p { font-size: 17px; color: rgba(255,255,255,0.65); max-width: 440px; margin-bottom: 36px; font-weight: 300; line-height: 1.7; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-primary { background: var(--orange); color: var(--white); font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 32px; border: none; border-radius: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.15s, transform 0.1s; }
+.btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary { background: transparent; color: var(--white); font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 32px; border: 2px solid rgba(255,255,255,0.3); border-radius: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.15s, background 0.15s; }
+.btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+
+.stats-bar { background: var(--orange); display: flex; align-items: center; justify-content: center; gap: 48px; padding: 18px 32px; flex-wrap: wrap; }
+.stat-item { text-align: center; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--white); letter-spacing: 1px; line-height: 1; }
+.stat-lbl { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-top: 2px; }
+
+.section { padding: 72px 32px; max-width: 1000px; margin: 0 auto; }
+.section-tag { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.section-tag::after { content: ''; display: block; height: 2px; width: 32px; background: var(--orange); }
+.section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 52px); letter-spacing: 1px; color: var(--navy); margin-bottom: 40px; line-height: 1; }
+
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; }
+.service-card { background: var(--navy); padding: 36px 28px; position: relative; overflow: hidden; }
+.service-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+.service-card:hover::before { transform: scaleX(1); }
+.service-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--white); line-height: 1; margin-bottom: -12px; }
+.service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: var(--white); margin-bottom: 10px; }
+.service-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; font-weight: 300; }
+
+.photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.photo-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; margin-bottom: 32px; }
+.pricing-item { background: var(--white); padding: 32px 24px; border-top: 4px solid var(--cream-dark); transition: border-color 0.2s; }
+.pricing-item:hover { border-color: var(--orange); }
+.pricing-item.featured { border-color: var(--orange); }
+.pricing-size { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 8px; }
+.pricing-amt { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--navy); letter-spacing: 1px; line-height: 1; }
+.pricing-desc { font-size: 14px; color: var(--text); margin-top: 10px; line-height: 1.5; font-weight: 700; }
+.pricing-badge { display: inline-block; background: var(--orange); color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; margin-bottom: 8px; }
+
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.about-text p { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.8; font-weight: 300; margin-bottom: 28px; }
+.about-visual { background: var(--navy-mid); padding: 48px 36px; text-align: center; position: relative; }
+.about-visual::after { content: ''; position: absolute; bottom: -8px; right: -8px; width: 100%; height: 100%; border: 2px solid var(--orange); pointer-events: none; }
+.about-names { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--white); letter-spacing: 3px; line-height: 1; }
+.about-names span { color: var(--orange); }
+.about-since { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 12px; }
+
+.page-header { background: var(--navy); padding: 48px 32px 40px; }
+.page-header-inner { max-width: 1000px; margin: 0 auto; }
+.page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 64px); color: var(--white); letter-spacing: 2px; line-height: 1; }
+
+.book-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.book-info h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--navy); letter-spacing: 1px; margin-bottom: 16px; }
+.price-list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-bottom: 28px; }
+.price-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.price-list li:last-child { border-bottom: none; }
+.price-list li span:first-child { color: var(--text-mid); }
+.price-list li span:last-child { font-weight: 700; color: var(--navy); }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); margin-bottom: 6px; }
+.form-group input { width: 100%; padding: 12px 16px; border: 2px solid var(--cream-dark); border-radius: 0; font-family: 'Lato', sans-serif; font-size: 15px; color: var(--text); background: var(--white); outline: none; transition: border-color 0.15s; }
+.form-group input:focus { border-color: var(--navy); }
+.success-msg { display: none; background: var(--green-bg); color: var(--green-text); padding: 16px 20px; font-size: 14px; margin-top: 16px; font-weight: 700; letter-spacing: 0.5px; }
+.error-msg { display: none; background: var(--red-bg); color: var(--red-text); padding: 16px 20px; font-size: 14px; margin-top: 16px; font-weight: 700; }
+
+.slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 8px; }
+.slot-btn { background: var(--white); border: 2px solid var(--cream-dark); padding: 13px 10px; cursor: pointer; text-align: center; font-family: 'Lato', sans-serif; transition: all 0.15s; }
+.slot-btn:hover { border-color: var(--navy); }
+.slot-btn.selected { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.slot-date-lbl { font-size: 13px; font-weight: 700; color: inherit; display: block; }
+.slot-time-lbl { font-size: 12px; color: var(--text-soft); display: block; margin-top: 3px; }
+.slot-btn.selected .slot-time-lbl { color: rgba(255,255,255,0.6); }
+.no-slots-notice { background: var(--cream-dark); padding: 22px 20px; font-size: 14px; color: var(--text-soft); text-align: center; }
+.slots-loading { padding: 22px 20px; font-size: 14px; color: var(--text-soft); text-align: center; }
+
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.contact-info { display: flex; flex-direction: column; gap: 24px; }
+.contact-item h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
+.contact-item a, .contact-item p { font-size: 20px; font-family: 'Lato', sans-serif; font-weight: 700; color: var(--navy); text-decoration: none; }
+.contact-item a:hover { color: var(--orange); }
+.contact-item .sub { font-size: 14px; font-weight: 300; color: var(--text-soft); margin-top: 2px; }
+.contact-pricing { background: var(--navy); padding: 48px 36px; }
+
+/* LOGIN */
+.login-wrap { max-width: 400px; margin: 80px auto; padding: 0 32px; }
+.login-wrap h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; color: var(--navy); margin-bottom: 24px; }
+.login-error { display: none; background: var(--red-bg); color: var(--red-text); padding: 12px 16px; font-size: 14px; margin-bottom: 16px; font-weight: 700; }
+
+/* TRACKER */
+.tracker-wrap { padding: 48px 32px; max-width: 1000px; margin: 0 auto; }
+.tracker-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+.tracker-topbar h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1px; color: var(--navy); }
+.t-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 32px; }
+.t-stat { background: var(--navy); padding: 20px; }
+.t-stat-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+.t-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--white); letter-spacing: 1px; line-height: 1; }
+.t-tabs { display: flex; border-bottom: 2px solid var(--cream-dark); margin-bottom: 28px; }
+.t-tab { padding: 10px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; color: var(--text-soft); font-family: 'Lato', sans-serif; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; }
+.t-tab.active { color: var(--navy); border-bottom-color: var(--navy); }
+.t-panel { display: none; }
+.t-panel.active { display: block; }
+.slot-add-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; align-items: flex-end; }
+.slot-add-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 130px; }
+.slot-add-group label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-soft); }
+.slot-add-row input { padding: 10px 14px; border: 2px solid var(--cream-dark); border-radius: 0; font-family: 'Lato', sans-serif; font-size: 13px; color: var(--text); background: var(--white); outline: none; width: 100%; }
+.slot-add-row input:focus { border-color: var(--navy); }
+.slots-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+.slot-card { background: var(--white); border: 2px solid var(--cream-dark); padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }
+.slot-card.is-booked { opacity: 0.55; background: var(--cream-dark); }
+.slot-card-info { display: flex; flex-direction: column; gap: 2px; }
+.slot-card-date { font-size: 14px; font-weight: 700; color: var(--navy); }
+.slot-card-time { font-size: 12px; color: var(--text-soft); }
+.slot-badge { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; }
+.slot-badge.open { background: var(--green-bg); color: var(--green-text); }
+.slot-badge.booked { background: var(--cream-dark); color: var(--text-soft); }
+.slot-del { background: none; border: none; color: var(--text-soft); cursor: pointer; font-size: 15px; padding: 2px 6px; margin-left: 6px; }
+.slot-del:hover { color: #E24B4A; }
+.slots-empty { background: var(--white); border: 2px solid var(--cream-dark); padding: 36px; text-align: center; color: var(--text-soft); font-size: 14px; }
+.t-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+.t-filters { display: flex; gap: 4px; flex-wrap: wrap; }
+.t-filter { padding: 6px 16px; border: 2px solid var(--cream-dark); background: transparent; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; color: var(--text-soft); font-family: 'Lato', sans-serif; transition: all 0.15s; }
+.t-filter.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.t-table-wrap { overflow-x: auto; background: var(--white); border: 2px solid var(--cream-dark); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 540px; }
+th { text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-soft); padding: 12px 16px; border-bottom: 2px solid var(--cream-dark); background: var(--cream); }
+td { padding: 13px 16px; border-bottom: 1px solid var(--cream-dark); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+.status-sel { font-size: 12px; border: 2px solid var(--cream-dark); padding: 4px 8px; background: var(--cream); color: var(--text); cursor: pointer; font-family: 'Lato', sans-serif; }
+.del-btn { background: none; border: none; color: var(--text-soft); cursor: pointer; font-size: 16px; padding: 2px 6px; }
+.del-btn:hover { color: #E24B4A; }
+.t-empty { color: var(--text-soft); font-size: 14px; text-align: center; padding: 40px; }
+.export-btn { background: var(--white); border: 2px solid var(--cream-dark); padding: 8px 18px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-family: 'Lato', sans-serif; cursor: pointer; color: var(--text-mid); transition: all 0.15s; }
+.export-btn:hover { border-color: var(--navy); color: var(--navy); }
+.signout-btn { background: none; border: none; font-size: 12px; color: rgba(255,255,255,0.3); cursor: pointer; font-family: 'Lato', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+.signout-btn:hover { color: rgba(255,255,255,0.7); }
+
+footer { background: var(--navy); padding: 40px 32px; }
+.footer-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); }
+.footer-logo em { color: var(--orange); font-style: normal; }
+.footer-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; }
+.footer-links a:hover { color: var(--white); }
+.team-login { background: none; border: none; font-size: 13px; color: rgba(255,255,255,0.2); cursor: pointer; font-family: 'Lato', sans-serif; }
+.team-login:hover { color: rgba(255,255,255,0.5); }
+
+@media (max-width: 680px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .about-layout, .contact-layout, .book-layout { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: 1fr; }
+  .hero::before { display: none; }
+  .t-stats { grid-template-columns: 1fr 1fr; }
+  .about-visual::after { display: none; }
+  .section { padding: 48px 20px; }
+  .tracker-wrap { padding: 32px 20px; }
+  .hero { padding: 52px 20px 48px; }
+  .hero h1 { font-size: clamp(44px, 12vw, 72px); }
+  .hero p { font-size: 15px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .book-layout { gap: 32px; }
+  .contact-layout { gap: 32px; }
+  .price-list li { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .price-list li span:last-child { font-size: 15px; }
+  .slot-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .t-stats { grid-template-columns: 1fr 1fr 1fr; }
+  .page-header { padding: 32px 20px 28px; }
+  .login-wrap { margin: 40px auto; padding: 0 20px; }
+  nav { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="goPage('home')">Weston <em>Grill</em> Co</div>
+  <div class="nav-links">
+    <a onclick="goPage('home')" id="nav-home" class="active">Home</a>
+    <a onclick="goPage('book')" id="nav-book">Book</a>
+    <a onclick="goPage('contact')" id="nav-contact">Contact</a>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="goPage('home');toggleMenu()">Home</a>
+  <a onclick="goPage('book');toggleMenu()">Book</a>
+  <a onclick="goPage('contact');toggleMenu()">Contact</a>
+</div>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Weston, CT · Est. 2024</div>
+      <h1>Professional<br>Grill Cleaning<br><span>Done Right</span></h1>
+      <p style="font-size:17px;color:rgba(255,255,255,0.9);max-width:600px;margin-bottom:36px;font-weight:700;line-height:1.7">We come to you. We do the dirty work. You fire up a spotless grill.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="goPage('book')">Make an appointment</button>
+        <button class="btn-secondary" onclick="goPage('contact')">Get in touch</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--cream)">
+    <div class="section">
+      <div class="section-tag">What we do</div>
+      <h2>Full Grill Cleaning,<br>Start to Finish</h2>
+      <div class="service-grid">
+        <div class="service-card"><div class="service-num">01</div><h3>Our Word Is Our Bond</h3><p>Call us for a quote. The price we say is the price you pay.</p></div>
+        <div class="service-card"><div class="service-num">02</div><h3>We Come To You</h3><p>Just leave the grill out. We'll do the rest.</p></div>
+        <div class="service-card"><div class="service-num">03</div><h3>Deep Clean</h3><p>Grates, burners, drip trays — fully degreased and scrubbed down to bare metal. We leave EVERYTHING clean.</p></div>
+      </div>
+    </div>
+  </div>
+  <div style="background:var(--cream)">
+    <div class="section">
+      <div class="section-tag">Pricing</div>
+      <h2>Simple, Size-Based Pricing</h2>
+      <div class="pricing-grid">
+        <div class="pricing-item featured">
+          <div class="pricing-badge">Standard</div>
+          <div class="pricing-amt">$120</div>
+          <div class="pricing-desc">Most gas &amp; charcoal grills</div>
+        </div>
+        <div class="pricing-item featured">
+          <div class="pricing-badge">Specialty</div>
+          <div class="pricing-amt">$160+</div>
+          <div class="pricing-desc">Smokers, built-ins &amp; large grills<br>— send us a pic to get a quote</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;text-align:center">
+        <p style="font-size:14px;color:var(--text-soft);margin-bottom:20px">Payment via Venmo <a href="https://venmo.com/Aimee-Drummey" target="_blank" style="color:var(--navy);font-weight:700">@Aimee-Drummey</a></p>
+        <button class="btn-primary" onclick="goPage('book')">Make an appointment</button>
+      </div>
+    </div>
+  </div>
+  <div style="background:var(--cream-dark)">
+    <div class="section">
+      <div class="section-tag">Fresh Off the Grill</div>
+      <h2>Our Work</h2>
+      <div class="photo-grid">
+        <img src="https://i.imgur.com/l6ZZCO4.jpeg" alt="Grill cleaning before and after" />
+        <img src="https://i.imgur.com/4ZudRr3.jpeg" alt="Grill cleaning before and after" />
+      </div>
+    </div>
+  </div>
+  <div style="background:var(--navy)">
+    <div class="section">
+      <div class="about-layout">
+        <div class="about-visual">
+          <div class="about-names">Teddy<br><span>&</span><br>Wyatt</div>
+          <div class="about-since">Friends since 5th grade</div>
+        </div>
+        <div class="about-text">
+          <div class="section-tag" style="color:var(--orange)">About Us</div>
+          <h2 style="color:var(--white)">Two Guys Who Love a Clean Grill</h2>
+          <p>We've been friends since 5th grade. Last summer we started cleaning grills together, had a blast doing it, and haven't stopped since. Book us and we promise you'll get the cleanest grill on the block.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn-primary" onclick="goPage('contact')">Say hello</button>
+            <a class="btn-secondary" href="https://instagram.com/westongrillco" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Weston <em>Grill</em> Co</div>
+      <div class="footer-links">
+        <a href="tel:2033137538">(203) 313-7538</a>
+        <a href="https://instagram.com/westongrillco" target="_blank">Instagram</a>
+        <button class="team-login" onclick="goPage('privacy')">Privacy</button>
+        <button class="team-login" onclick="goPage('login')">Team login</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- PRIVACY -->
+<div id="page-privacy" class="page">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="hero-tag">Transparency</div>
+      <h1>Privacy Notice</h1>
+    </div>
+  </div>
+  <div style="background:var(--cream)">
+    <div class="section" style="max-width:700px">
+      <h2 style="font-size:28px;margin-bottom:24px">How We Use Your Information</h2>
+      
+      <h3 style="font-family:'Bebas Neue';font-size:18px;color:var(--navy);margin-top:32px;margin-bottom:12px">Analytics & Location Tracking</h3>
+      <p style="font-size:15px;color:var(--text-mid);line-height:1.7;margin-bottom:16px">This website uses Google Analytics to track visitor behavior and approximate location data based on IP addresses. This helps us understand where our customers are coming from and improve our site. Your location is approximate (city-level) and never precise.</p>
+      
+      <h3 style="font-family:'Bebas Neue';font-size:18px;color:var(--navy);margin-top:32px;margin-bottom:12px">Booking Information</h3>
+      <p style="font-size:15px;color:var(--text-mid);line-height:1.7;margin-bottom:16px">When you book an appointment, we collect your name, phone, email, and address. This information is stored securely in our database and used to confirm your booking and communicate with you about your appointment. We also send a copy to Formspree for email confirmation.</p>
+      
+      <h3 style="font-family:'Bebas Neue';font-size:18px;color:var(--navy);margin-top:32px;margin-bottom:12px">Payment Information</h3>
+      <p style="font-size:15px;color:var(--text-mid);line-height:1.7;margin-bottom:16px">We do not handle payment directly. All payments are made through Venmo (@Aimee-Drummey). We never see or store your payment or financial information.</p>
+      
+      <h3 style="font-family:'Bebas Neue';font-size:18px;color:var(--navy);margin-top:32px;margin-bottom:12px">Opting Out of Analytics</h3>
+      <p style="font-size:15px;color:var(--text-mid);line-height:1.7;margin-bottom:16px">You can opt out of Google Analytics tracking by using privacy tools in your browser, enabling Do Not Track, or installing privacy browser extensions. Your booking information will still be collected to confirm your appointment.</p>
+      
+      <div style="margin-top:40px">
+        <button class="btn-primary" onclick="goPage('home')">← Back to site</button>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Weston <em>Grill</em> Co</div>
+      <div class="footer-links"><a href="tel:2033137538">(203) 313-7538</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- BOOK -->
+<div id="page-book" class="page">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="hero-tag">Make an Appointment</div>
+      <h1>Schedule Your Grill Clean</h1>
+    </div>
+  </div>
+  <div style="background:var(--cream)">
+    <div class="section">
+      <div class="book-layout">
+        <div class="book-info">
+          <h3>Pricing</h3>
+          <ul class="price-list">
+            <li><span>Standard grill</span><span>$120</span></li>
+            <li><span>Specialty (smoker, built-in, large)</span><span>Send a pic to get a quote</span></li>
+          </ul>
+          <div style="padding:20px;background:var(--white);border-left:4px solid var(--orange)">
+            <p style="font-size:14px;color:var(--text-mid);line-height:1.6">Payment via Venmo to <strong>@Aimee-Drummey</strong> once your appointment is confirmed.</p>
+          </div>
+        </div>
+        <div>
+          <div class="form-group">
+            <label>Pick an available slot</label>
+            <div id="slot-picker"><div class="slots-loading">Loading available slots...</div></div>
+          </div>
+          <div class="form-group"><label>Your name</label><input type="text" id="f-name" placeholder="Jane Smith" /></div>
+          <div class="form-group"><label>Phone number</label><input type="tel" id="f-phone" placeholder="(203) 555-0123" /></div>
+          <div class="form-group"><label>Email</label><input type="email" id="f-email" placeholder="jane@email.com" /></div>
+          <div class="form-group"><label>Address</label><input type="text" id="f-addr" placeholder="123 Main St, Weston, CT" /></div>
+          <button class="btn-primary" onclick="submitBooking()" style="width:100%">Request appointment</button>
+          <div class="success-msg" id="success-banner">Booking submitted! We'll call or text to confirm your slot. Payment via Venmo @Aimee-Drummey once confirmed.</div>
+          <div class="error-msg" id="book-error">Something went wrong — please try again or call us at (203) 313-7538.</div>
+          <p style="margin-top:16px;font-size:13px;color:var(--text-soft)">Questions? Call or text <a href="tel:2033137538" style="color:var(--navy);font-weight:700">(203) 313-7538</a> or email <a href="mailto:westongrillcompany@gmail.com" style="color:var(--navy);font-weight:700">westongrillcompany@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Weston <em>Grill</em> Co</div>
+      <div class="footer-links"><a href="tel:2033137538">(203) 313-7538</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="page">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="hero-tag">Contact</div>
+      <h1>Get In Touch</h1>
+    </div>
+  </div>
+  <div style="background:var(--cream)">
+    <div class="section">
+      <div class="contact-layout">
+        <div class="contact-info">
+          <div class="contact-item"><h4>Phone / Text</h4><a href="tel:2033137538">(203) 313-7538</a><div class="sub">Call or text anytime</div></div>
+          <div class="contact-item"><h4>Email</h4><a href="mailto:westongrillcompany@gmail.com">westongrillcompany@gmail.com</a></div>
+          <div class="contact-item"><h4>Venmo</h4><a href="https://venmo.com/Aimee-Drummey" target="_blank">@Aimee-Drummey</a></div>
+          <div class="contact-item"><h4>Instagram</h4><a href="https://instagram.com/westongrillco" target="_blank">@westongrillco</a></div>
+          <div class="contact-item"><h4>Service Area</h4><p>Weston, CT &amp; surrounding towns</p></div>
+          <div style="margin-top:8px"><button class="btn-primary" onclick="goPage('book')">Make an appointment</button></div>
+        </div>
+        <div class="contact-pricing">
+          <div class="section-tag" style="color:var(--orange)">Pricing</div>
+          <ul class="price-list" style="margin-bottom:0">
+            <li style="border-color:rgba(255,255,255,0.1)"><span style="color:rgba(255,255,255,0.5)">Standard grill</span><span style="color:var(--white)">$120</span></li>
+            <li style="border-color:rgba(255,255,255,0.1)"><span style="color:rgba(255,255,255,0.5)">Specialty (smoker, built-in, large)</span><span style="color:var(--white)">Send a pic to get a quote</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Weston <em>Grill</em> Co</div>
+      <div class="footer-links"><a href="tel:2033137538">(203) 313-7538</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- LOGIN -->
+<div id="page-login" class="page">
+  <div style="background:var(--cream);min-height:100vh">
+    <div class="login-wrap">
+      <h2>Team Login</h2>
+      <div class="login-error" id="login-error">Incorrect email or password.</div>
+      <div class="form-group"><label>Email</label><input type="email" id="l-email" placeholder="you@email.com" /></div>
+      <div class="form-group"><label>Password</label><input type="password" id="l-password" placeholder="••••••••" /></div>
+      <button class="btn-primary" onclick="doLogin()" style="width:100%">Sign in</button>
+      <p style="margin-top:16px;font-size:13px;color:var(--text-soft);text-align:center"><a href="#" onclick="goPage('home');return false;" style="color:var(--navy)">← Back to site</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- TRACKER -->
+<div id="page-tracker" class="page">
+  <div class="page-header">
+    <div class="page-header-inner" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="hero-tag">Internal</div>
+        <h1>Team Dashboard</h1>
+      </div>
+      <button class="signout-btn" onclick="doSignOut()">Sign out</button>
+    </div>
+  </div>
+  <div style="background:var(--cream)">
+    <div class="tracker-wrap">
+      <div class="t-stats">
+        <div class="t-stat"><div class="t-stat-label">Total bookings</div><div class="t-stat-val" id="s-total">0</div></div>
+        <div class="t-stat"><div class="t-stat-label">Upcoming</div><div class="t-stat-val" id="s-upcoming">0</div></div>
+        <div class="t-stat"><div class="t-stat-label">Open slots</div><div class="t-stat-val" id="s-open">0</div></div>
+      </div>
+      <div class="t-tabs">
+        <button class="t-tab active" onclick="switchTab('bookings',this)">Bookings</button>
+        <button class="t-tab" onclick="switchTab('slots',this)">Manage Slots</button>
+      </div>
+      <div id="panel-bookings" class="t-panel active">
+        <div class="t-top">
+          <div class="t-filters">
+            <button class="t-filter active" onclick="setFilter('all',this)">All</button>
+            <button class="t-filter" onclick="setFilter('upcoming',this)">Upcoming</button>
+            <button class="t-filter" onclick="setFilter('done',this)">Completed</button>
+            <button class="t-filter" onclick="setFilter('cancelled',this)">Cancelled</button>
+          </div>
+          <button class="export-btn" onclick="exportCSV()">Export CSV</button>
+        </div>
+        <div class="t-table-wrap">
+          <table>
+            <thead><tr><th>Customer</th><th>Phone</th><th>Address</th><th>Slot</th><th>Status</th><th></th></tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+          <div class="t-empty" id="empty-state" style="display:none">No bookings yet.</div>
+        </div>
+      </div>
+      <div id="panel-slots" class="t-panel">
+        <div class="slot-add-row">
+          <div class="slot-add-group"><label>Date</label><input type="date" id="sl-date" /></div>
+          <div class="slot-add-group" style="max-width:160px"><label>Time</label><input type="time" id="sl-time" /></div>
+          <button class="btn-primary" onclick="addSlot()" style="align-self:flex-end;white-space:nowrap;padding:10px 20px;font-size:12px;border-radius:0">+ Add slot</button>
+        </div>
+        <div id="slots-grid" class="slots-grid"></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Weston <em>Grill</em> Co</div>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ── SUPABASE SETUP ───────────────────────────────────
+var SUPABASE_URL = 'https://jpndxpixbfdkikkleutk.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_XAun4SVGnYueef3liZhpRg__y6MK44b';
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+var currentFilter = 'all';
+var selectedSlotId = null;
+var allBookings = [];
+var allSlots = [];
+
+// ── NAVIGATION ───────────────────────────────────────
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.nav-links a').forEach(function(a){ a.classList.remove('active'); });
+  document.getElementById('page-' + id).classList.add('active');
+  var n = document.getElementById('nav-' + id);
+  if (n) n.classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'book') renderSlotPicker();
+  if (id === 'tracker') { loadBookings(); loadSlots(); }
+}
+
+function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+function switchTab(tab, el) {
+  document.querySelectorAll('.t-tab').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.t-panel').forEach(function(p){ p.classList.remove('active'); });
+  el.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+// ── AUTH ─────────────────────────────────────────────
+async function doLogin() {
+  var email = document.getElementById('l-email').value.trim();
+  var pass  = document.getElementById('l-password').value;
+  var err   = document.getElementById('login-error');
+  err.style.display = 'none';
+  var res = await sb.auth.signInWithPassword({ email: email, password: pass });
+  if (res.error) { err.style.display = 'block'; return; }
+  goPage('tracker');
+}
+
+async function doSignOut() {
+  await sb.auth.signOut();
+  goPage('home');
+}
+
+// Check if already logged in when opening tracker
+async function openTracker() {
+  var session = await sb.auth.getSession();
+  if (session.data.session) { goPage('tracker'); }
+  else { goPage('login'); }
+}
+
+// ── HELPERS ──────────────────────────────────────────
+function fmtDate(d) { return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }); }
+function fmtTime(t) { var p=t.split(':'),h=parseInt(p[0],10),m=p[1],ampm=h>=12?'pm':'am'; h=h%12||12; return m==='00'?h+ampm:h+':'+m+ampm; }
+function fmtSlot(s) { return fmtDate(s.date) + ' at ' + fmtTime(s.time); }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── SLOT PICKER (public) ─────────────────────────────
+async function renderSlotPicker() {
+  var el = document.getElementById('slot-picker');
+  if (!el) return;
+  el.innerHTML = '<div class="slots-loading">Loading available slots...</div>';
+  var res = await sb.from('slots').select('*').eq('booked', false).order('date').order('time');
+  if (res.error || !res.data.length) {
+    selectedSlotId = null;
+    el.innerHTML = '<div class="no-slots-notice">No open slots right now — check back soon or <a href="#" onclick="goPage(\'contact\');return false;" style="color:var(--navy);font-weight:700">contact us</a> directly.</div>';
+    return;
+  }
+  
+  // Filter out past slots
+  var now = new Date();
+  var futureSlots = res.data.filter(function(s){
+    var slotDateTime = new Date(s.date + 'T' + s.time);
+    return slotDateTime > now;
+  });
+  
+  if (!futureSlots.length) {
+    selectedSlotId = null;
+    el.innerHTML = '<div class="no-slots-notice">No open slots right now — check back soon or <a href="#" onclick="goPage(\'contact\');return false;" style="color:var(--navy);font-weight:700">contact us</a> directly.</div>';
+    return;
+  }
+  
+  el.innerHTML = '<div class="slot-grid">' + futureSlots.map(function(s){
+    var sel = (selectedSlotId === s.id);
+    return '<button class="slot-btn'+(sel?' selected':'')+'" onclick="selectSlot('+s.id+')">'
+      +'<span class="slot-date-lbl">'+fmtDate(s.date)+'</span>'
+      +'<span class="slot-time-lbl">'+fmtTime(s.time)+'</span>'
+      +'</button>';
+  }).join('') + '</div>';
+}
+
+function selectSlot(id) { selectedSlotId = id; renderSlotPicker(); }
+
+// ── SUBMIT BOOKING (public) ──────────────────────────
+async function submitBooking() {
+  if (!selectedSlotId) { alert('Please select an available time slot.'); return; }
+  var name  = document.getElementById('f-name').value.trim();
+  var phone = document.getElementById('f-phone').value.trim();
+  var email = document.getElementById('f-email').value.trim();
+  var addr  = document.getElementById('f-addr').value.trim();
+  if (!name||!phone||!email||!addr) { alert('Please fill in all fields.'); return; }
+
+  // Check slot still open
+  var slotRes = await sb.from('slots').select('*').eq('id', selectedSlotId).single();
+  if (slotRes.error || slotRes.data.booked) {
+    alert('That slot was just taken. Please pick another.');
+    selectedSlotId = null; renderSlotPicker(); return;
+  }
+  var slot = slotRes.data;
+  var label = fmtSlot(slot);
+
+  // Mark slot booked
+  await sb.from('slots').update({ booked: true }).eq('id', slot.id);
+
+  // Insert booking
+  var bRes = await sb.from('bookings').insert([{
+    id: Date.now(), name: name, phone: phone, email: email, addr: addr,
+    slot_id: slot.id, slot_label: label,
+    date: slot.date, time: slot.time, status: 'upcoming'
+  }]);
+
+  if (bRes.error) {
+    document.getElementById('book-error').style.display = 'block';
+    // Undo slot mark
+    await sb.from('slots').update({ booked: false }).eq('id', slot.id);
+    return;
+  }
+
+  // Formspree notification
+  fetch('https://formspree.io/f/xeeprljo', {
+    method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify({ name:name, phone:phone, email:email, address:addr, slot:label, _replyto:email })
+  });
+
+  selectedSlotId = null;
+  ['f-name','f-phone','f-email','f-addr'].forEach(function(id){ document.getElementById(id).value=''; });
+  renderSlotPicker();
+  var b = document.getElementById('success-banner');
+  b.style.display = 'block';
+  setTimeout(function(){ b.style.display='none'; }, 6000);
+}
+
+// ── LOAD BOOKINGS (team) ─────────────────────────────
+async function loadBookings() {
+  var res = await sb.from('bookings').select('*').order('date').order('time');
+  allBookings = res.data || [];
+  renderBookings();
+  renderStats();
+}
+
+function renderBookings() {
+  var filtered = allBookings.filter(function(b){ return currentFilter==='all' ? true : b.status===currentFilter; });
+  var tbody = document.getElementById('tbody');
+  var empty = document.getElementById('empty-state');
+  if (!tbody) return;
+  if (!filtered.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  tbody.innerHTML = filtered.map(function(b){
+    return '<tr>'
+      +'<td style="font-weight:700">'+esc(b.name)+'</td>'
+      +'<td style="font-size:13px;color:var(--text-soft)">'+esc(b.phone)+'</td>'
+      +'<td style="font-size:13px;color:var(--text-soft)">'+esc(b.addr)+'</td>'
+      +'<td style="font-size:13px">'+esc(b.slot_label||(b.date?fmtDate(b.date):'—'))+'</td>'
+      +'<td><select class="status-sel" onchange="updateStatus('+b.id+',this.value)">'
+        +'<option value="upcoming"'+(b.status==='upcoming'?' selected':'')+'>Upcoming</option>'
+        +'<option value="done"'+(b.status==='done'?' selected':'')+'>Completed</option>'
+        +'<option value="cancelled"'+(b.status==='cancelled'?' selected':'')+'>Cancelled</option>'
+      +'</select></td>'
+      +'<td style="text-align:right"><button class="del-btn" onclick="deleteBooking('+b.id+')">&#x2715;</button></td>'
+    +'</tr>';
+  }).join('');
+}
+
+async function updateStatus(id, val) {
+  await sb.from('bookings').update({ status: val }).eq('id', id);
+  allBookings = allBookings.map(function(b){ return b.id===id ? Object.assign({},b,{status:val}) : b; });
+  renderBookings(); renderStats();
+}
+
+async function deleteBooking(id) {
+  if (!confirm('Remove this booking?')) return;
+  var b = allBookings.find(function(x){ return x.id===id; });
+  if (b && b.slot_id) await sb.from('slots').update({ booked: false }).eq('id', b.slot_id);
+  await sb.from('bookings').delete().eq('id', id);
+  allBookings = allBookings.filter(function(x){ return x.id!==id; });
+  renderBookings(); renderStats();
+}
+
+function setFilter(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.t-filter').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+  renderBookings();
+}
+
+// ── LOAD SLOTS (team) ────────────────────────────────
+async function loadSlots() {
+  var res = await sb.from('slots').select('*').order('date').order('time');
+  allSlots = res.data || [];
+  renderSlotsGrid();
+  renderStats();
+}
+
+async function addSlot() {
+  var date = document.getElementById('sl-date').value;
+  var time = document.getElementById('sl-time').value;
+  if (!date||!time) { alert('Please enter both a date and time.'); return; }
+  var dup = allSlots.find(function(s){ return s.date===date && s.time===time; });
+  if (dup) { alert('That slot already exists.'); return; }
+  var newSlot = { id: Date.now(), date: date, time: time, booked: false };
+  var res = await sb.from('slots').insert([newSlot]);
+  if (res.error) { alert('Error adding slot. Please try again.'); return; }
+  allSlots.push(newSlot);
+  allSlots.sort(function(a,b){ return (a.date+a.time).localeCompare(b.date+b.time); });
+  document.getElementById('sl-date').value='';
+  document.getElementById('sl-time').value='';
+  renderSlotsGrid(); renderStats();
+}
+
+async function deleteSlot(id) {
+  var s = allSlots.find(function(x){ return x.id===id; });
+  var msg = s&&s.booked ? 'This slot has a booking. Remove it anyway?' : 'Remove this slot?';
+  if (!confirm(msg)) return;
+  await sb.from('slots').delete().eq('id', id);
+  allSlots = allSlots.filter(function(x){ return x.id!==id; });
+  renderSlotsGrid(); renderStats();
+}
+
+function renderSlotsGrid() {
+  var el = document.getElementById('slots-grid'); if (!el) return;
+  if (!allSlots.length) { el.innerHTML='<div class="slots-empty">No slots added yet — use the form above to add your availability.</div>'; return; }
+  el.innerHTML = allSlots.map(function(s){
+    return '<div class="slot-card'+(s.booked?' is-booked':'')+'">'
+      +'<div class="slot-card-info">'
+        +'<div class="slot-card-date">'+fmtDate(s.date)+'</div>'
+        +'<div class="slot-card-time">'+fmtTime(s.time)+'</div>'
+      +'</div>'
+      +'<div style="display:flex;align-items:center;gap:4px">'
+        +'<span class="slot-badge '+(s.booked?'booked':'open')+'">'+(s.booked?'Booked':'Open')+'</span>'
+        +'<button class="slot-del" onclick="deleteSlot('+s.id+')" title="Remove">&#x2715;</button>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+}
+
+function renderStats() {
+  var ts=document.getElementById('s-total'), tu=document.getElementById('s-upcoming'), to=document.getElementById('s-open');
+  if (ts) ts.textContent = allBookings.length;
+  if (tu) tu.textContent = allBookings.filter(function(b){ return b.status==='upcoming'; }).length;
+  if (to) to.textContent = allSlots.filter(function(s){ return !s.booked; }).length;
+}
+
+function exportCSV() {
+  if (!allBookings.length) { alert('No bookings to export.'); return; }
+  var rows=[['Name','Phone','Email','Address','Slot','Status']];
+  allBookings.forEach(function(b){ rows.push([b.name,b.phone||'',b.email||'',b.addr,b.slot_label||(b.date||''),b.status]); });
+  var csv=rows.map(function(r){ return r.map(function(c){ return '"'+String(c).replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+  var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='weston-grill-bookings.csv'; a.click();
+}
+
+// ── INIT ─────────────────────────────────────────────
+// Load slots for book page on start
+renderSlotPicker();
+</script>
+</body>
+</html>
